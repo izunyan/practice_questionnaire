@@ -10,7 +10,8 @@ output:
     number_sections: true
     theme: readable
     highlight: pygments
-    css: custom.css
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -63,14 +64,14 @@ skimr::skim(df)
 ```
 
 # 練習用データ作成
-## 最初の50名からランダムにサンプリング
+## 最初の1000名からランダムにサンプリング
 ```{r}
 set.seed(123) # ランダムサンプリングを再現可能にするため
 
 df_2021 <- 
   df |> 
-  slice_head(n = 50) |> 
-  slice_sample(n = 30)
+  slice_head(n = 1000) |> 
+  slice_sample(n = 500)
 
 df_2021
 ```
@@ -80,8 +81,8 @@ set.seed(12345) # ランダムサンプリングを再現可能にするため
 
 df_2022 <- 
   df |> 
-  slice_head(n = 50) |> 
-  slice_sample(n = 30)
+  slice_head(n = 1000) |> 
+  slice_sample(n = 500)
 
 df_2022
 ```
@@ -108,6 +109,12 @@ rm(df_2021, df_2022)
 
 # 練習用データの加工
 
+## パッケージが入っていない場合にインストール
+```{r eval = FALSE}
+install.packages("readxl")
+```
+
+
 ## 読み込み
 
 ```{r}
@@ -123,7 +130,7 @@ df_2022 <-
 ```{r}
 df_2021 <- 
   df_2021 |> 
-  select(A1:C5, gender, education, age)
+  select(id, A1:C5, gender, education, age)
 
 df_2021
 ```
@@ -132,14 +139,14 @@ df_2021
 ```{r}
 df_2021 <- 
   df_2021 |> 
-  filter(age >= 20 & age < 30) |> 
-  slice(1:100) # 最初の100人に
+  filter(age >= 20 & age < 30)
 
 df_2021
 ```
 
 ## 列名変更
 
+* 名前変える必要，本当はないですけどデモンストレーション用に
 * あえて冗長に書きます
 
 ```{r}
@@ -208,8 +215,59 @@ df_2021 <-
 df_2021 |> 
   select(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)
 
-1 + 6 + 5 + 6 + 5
+3 + 3 + 4 + 3 + 4
 ```
 
+## 2022年データ一気に
+```{r}
+df_2022 <- 
+  df_2022 |> 
+    select(id, A1:C5, gender, education, age) |> 
+    filter(age >= 20 & age < 30) |> 
+    rename_with(~str_c("設問_", .),
+                c(A1:C5)) |> 
+    mutate(across(c(設問_A1, 設問_C4),
+                  list(r = ~case_when(
+                    . == 1 ~ 6L, 
+                    . == 2 ~ 5L,
+                    . == 3 ~ 4L,
+                    . == 4 ~ 3L,
+                    . == 5 ~ 2L,
+                    . == 6 ~ 1L)
+                    )
+                  )
+           ) |> 
+    mutate(
+      A合計 = 設問_A1_r + 設問_A2 + 設問_A3 + 設問_A4 + 設問_A5,
+      C合計 = 設問_C1 + 設問_C2 + 設問_C3 + 設問_C4_r + 設問_C5
+    )
+  
+```
+
+## データ連結
+
+* id列をキーに，両方で同じidを持つ行だけを連結
+* 先に来る2021年データの列には.x，後に来る2022年データの列には.yがついて識別できるように
 
 
+```{r}
+df_all <- 
+  df_2021 |> 
+  inner_join(df_2022, by = "id")
+
+df_all |> glimpse()
+```
+
+## rename
+
+
+```{r}
+df_all <- 
+  df_all |> 
+  rename_with(~str_replace(., ".x", "_2021"),
+              ends_with("x")) |>
+  rename_with(~str_replace(., ".y", "_2022"),
+              ends_with("y"))
+
+df_all |> glimpse()
+```
