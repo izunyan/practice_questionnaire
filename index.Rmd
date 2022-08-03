@@ -271,3 +271,22 @@ df_all <-
 
 df_all |> glimpse()
 ```
+
+
+## wide→long形式データに
+
+```{r}
+df_long <- 
+  df_all |> 
+  select(id,
+         gender_2021, education_2021, age_2021,
+         contains("合計")) |> 
+  pivot_longer(!c(id, gender_2021:age_2021),   # longにする列は!c()に指定した列以外
+               names_to = c(".value", "year"),  
+               names_pattern =  "(.*)_(.*)")
+  
+
+df_long
+
+```
+
