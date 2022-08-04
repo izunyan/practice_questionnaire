@@ -95,11 +95,13 @@ df_2022
 install.packages("writexl")
 ```
 
-
-```{r eval=FALSE, include=FALSE}
+### dataフォルダを作成してexcel出力
+```{r eval=FALSE}
+dir.create("data") # フォルダ作成
 writexl::write_xlsx(df_2021, "data/df_2021.xlsx")
 writexl::write_xlsx(df_2022, "data/df_2022.xlsx")
 ```
+
 
 ### 作成データ消去
 ```{r}

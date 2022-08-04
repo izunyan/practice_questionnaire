@@ -1588,7 +1588,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">practice_questionnaire</h1>
 <h4 class="author"></h4>
-<h4 class="date">2022/08/03</h4>
+<h4 class="date">2022/08/04</h4>
 
 </div>
 
@@ -2185,9 +2185,16 @@ div.tocify {
 パッケージが入っていない場合にインストール</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;writexl&quot;</span>)</span></code></pre></div>
 </div>
-<div id="作成データ消去" class="section level3" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> 作成データ消去</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_2021, df_2022)</span></code></pre></div>
+<div id="dataフォルダを作成してexcel出力" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span>
+dataフォルダを作成してexcel出力</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>) <span class="co"># フォルダ作成</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(df_2021, <span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(df_2022, <span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
+</div>
+<div id="作成データ消去" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> 作成データ消去</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_2021, df_2022)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -2196,23 +2203,23 @@ div.tocify {
 <div id="パッケージが入っていない場合にインストール-3" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span>
 パッケージが入っていない場合にインストール</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
 </div>
 <div id="読み込み" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> 読み込み</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
 </div>
 <div id="列の選択" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> 列の選択</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
 <pre><code>## # A tibble: 500 × 14
 ##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5 gender
 ##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -2230,11 +2237,11 @@ div.tocify {
 </div>
 <div id="行の選択" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> 行の選択</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
 <pre><code>## # A tibble: 218 × 14
 ##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5 gender
 ##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -2256,20 +2263,20 @@ div.tocify {
 <li>名前変える必要，本当はないですけどデモンストレーション用に</li>
 <li>あえて冗長に書きます</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(設問<span class="at">_A1 =</span> A1,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A2 =</span> A2,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A3 =</span> A3,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A4 =</span> A4,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A5 =</span> A5,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C1 =</span> C1,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C2 =</span> C2,</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C3 =</span> C3,</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4 =</span> C4,</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C5 =</span> C5)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>df_2021  </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(設問<span class="at">_A1 =</span> A1,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A2 =</span> A2,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A3 =</span> A3,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A4 =</span> A4,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A5 =</span> A5,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C1 =</span> C1,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C2 =</span> C2,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C3 =</span> C3,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4 =</span> C4,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C5 =</span> C5)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>df_2021  </span></code></pre></div>
 <pre><code>## # A tibble: 218 × 14
 ##    id    設問_A1 設問_A2 設問_A3 設問_A4 設問_A5 設問_C1 設問_C2 設問_C3 設問_C4
 ##    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -2292,27 +2299,27 @@ div.tocify {
 <ul>
 <li>あえて冗長に書きます</li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(設問<span class="at">_A1_r =</span> <span class="fu">case_when</span>(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, <span class="co"># Lがつくのは，整数の型という意味</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L),</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4_r =</span> <span class="fu">case_when</span>(</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(設問<span class="at">_A1_r =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, <span class="co"># Lがつくのは，整数の型という意味</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4_r =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div id="確認" class="section level3" number="5.6.1">
 <h3><span class="header-section-number">5.6.1</span> 確認</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="fu">c</span>(<span class="st">&quot;設問_A1&quot;</span>, <span class="st">&quot;設問_C4&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="fu">c</span>(<span class="st">&quot;設問_A1&quot;</span>, <span class="st">&quot;設問_C4&quot;</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 218 × 4
 ##    設問_A1 設問_A1_r 設問_C4 設問_C4_r
 ##      &lt;dbl&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;
@@ -2331,14 +2338,14 @@ div.tocify {
 </div>
 <div id="合計得点の作成" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> 合計得点の作成</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>         C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>         C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5)</span></code></pre></div>
 <div id="確認-1" class="section level3" number="5.7.1">
 <h3><span class="header-section-number">5.7.1</span> 確認</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)</span></code></pre></div>
 <pre><code>## # A tibble: 218 × 6
 ##    設問_A1_r 設問_A2 設問_A3 設問_A4 設問_A5 A合計
 ##        &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -2353,34 +2360,34 @@ div.tocify {
 ##  9         5       4       4       4       6    23
 ## 10         2       5       5       6       5    23
 ## # … with 208 more rows</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 17</code></pre>
 </div>
 </div>
 <div id="年データ一気に" class="section level2" number="5.8">
 <h2><span class="header-section-number">5.8</span>
 2022年データ一気に</h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  df_2022 <span class="sc">|&gt;</span> </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age) <span class="sc">|&gt;</span> </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_c</span>(<span class="st">&quot;設問_&quot;</span>, .),</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(A1<span class="sc">:</span>C5)) <span class="sc">|&gt;</span> </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(設問_A1, 設問_C4),</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">case_when</span>(</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>      A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>      C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  df_2022 <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age) <span class="sc">|&gt;</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_c</span>(<span class="st">&quot;設問_&quot;</span>, .),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(A1<span class="sc">:</span>C5)) <span class="sc">|&gt;</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(設問_A1, 設問_C4),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">case_when</span>(</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>      A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>      C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 </div>
 <div id="データ連結" class="section level2" number="5.9">
 <h2><span class="header-section-number">5.9</span> データ連結</h2>
@@ -2388,11 +2395,11 @@ div.tocify {
 <li>id列をキーに，両方で同じidを持つ行だけを連結</li>
 <li>先に来る2021年データの列には.x，後に来る2022年データの列には.yがついて識別できるように</li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(df_2022, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(df_2022, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 91
 ## Columns: 35
 ## $ id          &lt;chr&gt; &quot;195&quot;, &quot;818&quot;, &quot;953&quot;, &quot;348&quot;, &quot;649&quot;, &quot;26&quot;, &quot;932&quot;, &quot;590&quot;, &quot;62…
@@ -2433,14 +2440,14 @@ div.tocify {
 </div>
 <div id="rename" class="section level2" number="5.10">
 <h2><span class="header-section-number">5.10</span> rename</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.x&quot;</span>, <span class="st">&quot;_2021&quot;</span>),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;x&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.y&quot;</span>, <span class="st">&quot;_2022&quot;</span>),</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.x&quot;</span>, <span class="st">&quot;_2021&quot;</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;x&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.y&quot;</span>, <span class="st">&quot;_2022&quot;</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;y&quot;</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 91
 ## Columns: 35
 ## $ id             &lt;chr&gt; &quot;195&quot;, &quot;818&quot;, &quot;953&quot;, &quot;348&quot;, &quot;649&quot;, &quot;26&quot;, &quot;932&quot;, &quot;590&quot;, …
@@ -2482,17 +2489,17 @@ div.tocify {
 <div id="widelong形式データに" class="section level2" number="5.11">
 <h2><span class="header-section-number">5.11</span>
 wide→long形式データに</h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>         gender_2021, education_2021, age_2021,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">contains</span>(<span class="st">&quot;合計&quot;</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(id, gender_2021<span class="sc">:</span>age_2021),   <span class="co"># longにする列は!c()に指定した列以外</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;year&quot;</span>),  </span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span>  <span class="st">&quot;(.*)_(.*)&quot;</span>)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>df_long</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         gender_2021, education_2021, age_2021,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">contains</span>(<span class="st">&quot;合計&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(id, gender_2021<span class="sc">:</span>age_2021),   <span class="co"># longにする列は!c()に指定した列以外</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;year&quot;</span>),  </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span>  <span class="st">&quot;(.*)_(.*)&quot;</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>df_long</span></code></pre></div>
 <pre><code>## # A tibble: 182 × 7
 ##    id    gender_2021 education_2021 age_2021 year  A合計 C合計
 ##    &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
