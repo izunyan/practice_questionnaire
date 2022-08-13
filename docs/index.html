@@ -1588,79 +1588,183 @@ div.tocify {
 
 <h1 class="title toc-ignore">practice_questionnaire</h1>
 <h4 class="author"></h4>
-<h4 class="date">2022/08/04</h4>
+<h4 class="date">2022/08/13</h4>
 
 </div>
 
 
-<div id="パッケージ読み込み" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> パッケージ読み込み</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div id="パッケージが入っていない場合にインストール" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span>
-パッケージが入っていない場合にインストール</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;psychTools&quot;</span>)</span></code></pre></div>
+<div id="データ作成非表示" class="section level1" number="1">
+<h1><span class="header-section-number">1</span>
+データ作成（非表示）</h1>
+<!-- * https://bookdown.org/ndphillips/YaRrr/generating-random-data.html -->
+<!-- https://declaredesign.org/r/fabricatr/articles/getting_started.html -->
+<!-- https://rviews.rstudio.com/2020/09/09/fake-data-with-r/ -->
 </div>
-</div>
-<div id="サンプルデータ読み込みと先頭の表示" class="section level1" number="2">
-<h1><span class="header-section-number">2</span>
-サンプルデータ読み込みと先頭の表示</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  psychTools<span class="sc">::</span>bfi</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
-<pre><code>##       A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4
-## 61617  2  4  3  4  4  2  3  3  4  4  3  3  3  4  4  3  4  2  2  3  3  6  3  4
-## 61618  2  4  5  2  5  5  4  4  3  4  1  1  6  4  3  3  3  3  5  5  4  2  4  3
-## 61620  5  4  5  4  4  4  5  4  2  5  2  4  4  4  5  4  5  4  2  3  4  2  5  5
-## 61621  4  4  6  5  5  4  4  3  5  5  5  3  4  4  4  2  5  2  4  1  3  3  4  3
-## 61622  2  3  3  4  5  4  4  5  3  2  2  2  5  4  5  2  3  4  4  3  3  3  4  3
-## 61623  6  6  5  6  5  6  6  6  1  3  2  1  6  5  6  3  5  2  2  3  4  3  5  6
-##       O5 gender education age
-## 61617  3      1        NA  16
-## 61618  3      2        NA  18
-## 61620  2      2        NA  17
-## 61621  5      2        NA  17
-## 61622  3      1        NA  17
-## 61623  1      2         3  21</code></pre>
-<div id="便利なtibble形式に変換しておく" class="section level2" number="2.1">
+<div id="練習用データの加工" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> 練習用データの加工</h1>
+<div id="パッケージが入っていない場合にインストール" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span>
-便利なtibble形式に変換しておく</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(df)</span></code></pre></div>
-<div id="応用列のインデックスをidに" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span>
-（応用)列のインデックスをidに</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">&quot;id&quot;</span>)</span></code></pre></div>
-</div>
-</div>
-</div>
-<div id="データの概要" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> データの概要</h1>
-<div id="パッケージが入っていない場合にインストール-1" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span>
 パッケージが入っていない場合にインストール</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;skimr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;skimr&quot;</span>)</span></code></pre></div>
 </div>
-<div id="概要表示" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> 概要表示</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df)</span></code></pre></div>
+<div id="パッケージ読み込み" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span>
+パッケージ読み込み</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+</div>
+<div id="データ読み込み" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> データ読み込み</h2>
+<ul>
+<li><code>パッケージ名::関数</code>でパッケージを読み込まず直接実行できる</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
+</div>
+<div id="データ確認" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> データ確認</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
+<pre><code>## # A tibble: 100 × 4
+##    ID    ペンギンのことが大好き         ペンギンが可愛い        ペンギンのこと… 
+##    &lt;chr&gt; &lt;chr&gt;                          &lt;chr&gt;                   &lt;chr&gt;           
+##  1 001   どちらともいえない             どちらともいえない      非常にあてはまる
+##  2 002   どちらともいえない             どちらかといえばあては… どちらかといえ… 
+##  3 003   非常にあてはまる               どちらともいえない      どちらかといえ… 
+##  4 004   どちらかといえばあてはまる     どちらともいえない      どちらともいえ… 
+##  5 005   どちらかといえばあてはまる     どちらともいえない      どちらかといえ… 
+##  6 006   非常にあてはまる               どちらともいえない      どちらかといえ… 
+##  7 007   どちらかといえばあてはまる     どちらともいえない      どちらかといえ… 
+##  8 008   どちらかといえばあてはまらない どちらかといえばあては… どちらかといえ… 
+##  9 009   どちらともいえない             どちらともいえない      どちらかといえ… 
+## 10 010   どちらともいえない             どちらかといえばあては… どちらかといえ… 
+## # … with 90 more rows</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_2022</span></code></pre></div>
+<pre><code>## # A tibble: 80 × 4
+##    ID    ペンギンのことが大好き         ペンギンが可愛い        ペンギンのこと…
+##    &lt;chr&gt; &lt;chr&gt;                          &lt;chr&gt;                   &lt;chr&gt;          
+##  1 077   どちらともいえない             非常にあてはまる        どちらともいえ…
+##  2 044   どちらかといえばあてはまる     どちらかといえばあては… 全くあてはまら…
+##  3 054   どちらかといえばあてはまる     どちらかといえばあては… どちらともいえ…
+##  4 085   どちらかといえばあてはまる     どちらかといえばあては… 全くあてはまら…
+##  5 025   どちらともいえない             どちらともいえない      どちらかといえ…
+##  6 029   非常にあてはまる               非常にあてはまる        どちらともいえ…
+##  7 020   非常にあてはまる               どちらともいえない      どちらかといえ…
+##  8 093   非常にあてはまる               非常にあてはまる        どちらともいえ…
+##  9 013   どちらかといえばあてはまらない どちらかといえばあては… どちらともいえ…
+## 10 100   どちらともいえない             どちらかといえばあては… どちらかといえ…
+## # … with 70 more rows</code></pre>
+</div>
+<div id="項目名列名を簡単にする" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span>
+項目名（列名）を簡単にする</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">item1 =</span> <span class="st">&quot;ペンギンのことが大好き&quot;</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">item2 =</span> <span class="st">&quot;ペンギンが可愛い&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">item3 =</span> <span class="st">&quot;ペンギンのことが苦手&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
+<pre><code>## # A tibble: 100 × 4
+##    ID    item1                          item2                          item3    
+##    &lt;chr&gt; &lt;chr&gt;                          &lt;chr&gt;                          &lt;chr&gt;    
+##  1 001   どちらともいえない             どちらともいえない             非常にあ…
+##  2 002   どちらともいえない             どちらかといえばあてはまる     どちらか…
+##  3 003   非常にあてはまる               どちらともいえない             どちらか…
+##  4 004   どちらかといえばあてはまる     どちらともいえない             どちらと…
+##  5 005   どちらかといえばあてはまる     どちらともいえない             どちらか…
+##  6 006   非常にあてはまる               どちらともいえない             どちらか…
+##  7 007   どちらかといえばあてはまる     どちらともいえない             どちらか…
+##  8 008   どちらかといえばあてはまらない どちらかといえばあてはまらない どちらか…
+##  9 009   どちらともいえない             どちらともいえない             どちらか…
+## 10 010   どちらともいえない             どちらかといえばあてはまる     どちらか…
+## # … with 90 more rows</code></pre>
+<div id="年データで同じことをやってみよう非表示" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span>
+【？】2022年データで同じことをやってみよう（非表示）</h3>
+</div>
+</div>
+<div id="回答選択肢を数字にする" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span>
+回答選択肢を数字にする</h2>
+<div id="変換が正しいか確認" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span>
+変換が正しいか確認</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">item1_n =</span> <span class="fu">case_when</span>(item1 <span class="sc">==</span> <span class="st">&quot;全くあてはまらない&quot;</span>             <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                        item1 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまらない&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        item1 <span class="sc">==</span> <span class="st">&quot;どちらともいえない&quot;</span>             <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        item1 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまる&quot;</span>     <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        item1 <span class="sc">==</span> <span class="st">&quot;非常にあてはまる&quot;</span>               <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item1, item1_n)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   item1                          item1_n     n
+##   &lt;chr&gt;                            &lt;dbl&gt; &lt;int&gt;
+## 1 どちらかといえばあてはまらない       2    12
+## 2 どちらかといえばあてはまる           4    33
+## 3 どちらともいえない                   3    35
+## 4 全くあてはまらない                   1     2
+## 5 非常にあてはまる                     5    18</code></pre>
+</div>
+<div id="変換" class="section level3" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> 変換</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">item1 =</span> <span class="fu">case_when</span>(item1 <span class="sc">==</span> <span class="st">&quot;全くあてはまらない&quot;</span>             <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                      item1 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまらない&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                      item1 <span class="sc">==</span> <span class="st">&quot;どちらともいえない&quot;</span>             <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                      item1 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまる&quot;</span>     <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                      item1 <span class="sc">==</span> <span class="st">&quot;非常にあてはまる&quot;</span>               <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">item2 =</span> <span class="fu">case_when</span>(item2 <span class="sc">==</span> <span class="st">&quot;全くあてはまらない&quot;</span>             <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                      item2 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまらない&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                      item2 <span class="sc">==</span> <span class="st">&quot;どちらともいえない&quot;</span>             <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                      item2 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまる&quot;</span>     <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                      item2 <span class="sc">==</span> <span class="st">&quot;非常にあてはまる&quot;</span>               <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">item3 =</span> <span class="fu">case_when</span>(item3 <span class="sc">==</span> <span class="st">&quot;全くあてはまらない&quot;</span>             <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                      item3 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまらない&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                      item3 <span class="sc">==</span> <span class="st">&quot;どちらともいえない&quot;</span>             <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                      item3 <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまる&quot;</span>     <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                      item3 <span class="sc">==</span> <span class="st">&quot;非常にあてはまる&quot;</span>               <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div id="効率化" class="section level4" number="2.6.2.1">
+<h4><span class="header-section-number">2.6.2.1</span> 【効率化】</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;item&quot;</span>), <span class="co"># またはc(&quot;item1&quot;, &quot;item2&quot;, &quot;item3&quot;)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                <span class="sc">~</span><span class="fu">case_when</span>(.x <span class="sc">==</span> <span class="st">&quot;全くあてはまらない&quot;</span>             <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                           .x <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまらない&quot;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                           .x <span class="sc">==</span> <span class="st">&quot;どちらともいえない&quot;</span>             <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                           .x <span class="sc">==</span> <span class="st">&quot;どちらかといえばあてはまる&quot;</span>     <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                           .x <span class="sc">==</span> <span class="st">&quot;非常にあてはまる&quot;</span>               <span class="sc">~</span> <span class="dv">5</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
+<div id="年のデータを同じように変換してみよう非表示" class="section level5" number="2.6.2.1.1">
+<h5><span class="header-section-number">2.6.2.1.1</span>
+【？】2022年のデータを同じように変換してみよう（非表示）</h5>
+</div>
+</div>
+</div>
+<div id="確認" class="section level3" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> 確認</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df_2021)</span></code></pre></div>
 <table>
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
-<td align="left">df</td>
+<td align="left">df_2021</td>
 </tr>
 <tr class="even">
 <td align="left">Number of rows</td>
-<td align="left">2800</td>
+<td align="left">100</td>
 </tr>
 <tr class="odd">
 <td align="left">Number of columns</td>
-<td align="left">29</td>
+<td align="left">4</td>
 </tr>
 <tr class="even">
 <td align="left">_______________________</td>
@@ -1676,7 +1780,7 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td align="left">numeric</td>
-<td align="left">28</td>
+<td align="left">3</td>
 </tr>
 <tr class="even">
 <td align="left">________________________</td>
@@ -1714,31 +1818,31 @@ div.tocify {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">id</td>
+<td align="left">ID</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">3</td>
 <td align="right">0</td>
-<td align="right">2800</td>
+<td align="right">100</td>
 <td align="right">0</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table style="width:100%;">
+<table>
 <colgroup>
 <col width="18%" />
 <col width="13%" />
 <col width="18%" />
-<col width="7%" />
-<col width="7%" />
-<col width="3%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
 <col width="5%" />
 <col width="5%" />
 <col width="5%" />
 <col width="6%" />
-<col width="7%" />
+<col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1757,763 +1861,369 @@ div.tocify {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">A1</td>
-<td align="right">16</td>
-<td align="right">0.99</td>
-<td align="right">2.41</td>
-<td align="right">1.41</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">6</td>
-<td align="left">▇▂▂▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">A2</td>
-<td align="right">27</td>
-<td align="right">0.99</td>
-<td align="right">4.80</td>
-<td align="right">1.17</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▂▁▅▇▇</td>
-</tr>
-<tr class="odd">
-<td align="left">A3</td>
-<td align="right">26</td>
-<td align="right">0.99</td>
-<td align="right">4.60</td>
-<td align="right">1.30</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▂▂▅▇▆</td>
-</tr>
-<tr class="even">
-<td align="left">A4</td>
-<td align="right">19</td>
-<td align="right">0.99</td>
-<td align="right">4.70</td>
-<td align="right">1.48</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▂▁▃▅▇</td>
-</tr>
-<tr class="odd">
-<td align="left">A5</td>
-<td align="right">16</td>
-<td align="right">0.99</td>
-<td align="right">4.56</td>
-<td align="right">1.26</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▂▂▅▇▆</td>
-</tr>
-<tr class="even">
-<td align="left">C1</td>
-<td align="right">21</td>
-<td align="right">0.99</td>
-<td align="right">4.50</td>
-<td align="right">1.24</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▂▂▅▇▅</td>
-</tr>
-<tr class="odd">
-<td align="left">C2</td>
-<td align="right">24</td>
-<td align="right">0.99</td>
-<td align="right">4.37</td>
-<td align="right">1.32</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▃▂▆▇▅</td>
-</tr>
-<tr class="even">
-<td align="left">C3</td>
-<td align="right">20</td>
-<td align="right">0.99</td>
-<td align="right">4.30</td>
-<td align="right">1.29</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▃▂▆▇▅</td>
-</tr>
-<tr class="odd">
-<td align="left">C4</td>
-<td align="right">26</td>
-<td align="right">0.99</td>
-<td align="right">2.55</td>
-<td align="right">1.38</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▂▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">C5</td>
-<td align="right">16</td>
-<td align="right">0.99</td>
-<td align="right">3.30</td>
-<td align="right">1.63</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▇▂▅▃▂</td>
-</tr>
-<tr class="odd">
-<td align="left">E1</td>
-<td align="right">23</td>
-<td align="right">0.99</td>
-<td align="right">2.97</td>
-<td align="right">1.63</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▃▂▂</td>
-</tr>
-<tr class="even">
-<td align="left">E2</td>
-<td align="right">16</td>
-<td align="right">0.99</td>
-<td align="right">3.14</td>
-<td align="right">1.61</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▃▂▂</td>
-</tr>
-<tr class="odd">
-<td align="left">E3</td>
-<td align="right">25</td>
-<td align="right">0.99</td>
-<td align="right">4.00</td>
-<td align="right">1.35</td>
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▅▃▇▇▃</td>
-</tr>
-<tr class="even">
-<td align="left">E4</td>
-<td align="right">9</td>
-<td align="right">1.00</td>
-<td align="right">4.42</td>
-<td align="right">1.46</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▃▂▃▇▆</td>
-</tr>
-<tr class="odd">
-<td align="left">E5</td>
-<td align="right">21</td>
-<td align="right">0.99</td>
-<td align="right">4.42</td>
-<td align="right">1.33</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▃▂▅▇▅</td>
-</tr>
-<tr class="even">
-<td align="left">N1</td>
-<td align="right">22</td>
-<td align="right">0.99</td>
-<td align="right">2.93</td>
-<td align="right">1.57</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▃▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">N2</td>
-<td align="right">21</td>
-<td align="right">0.99</td>
-<td align="right">3.51</td>
-<td align="right">1.53</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▇▃▆▅▃</td>
-</tr>
-<tr class="even">
-<td align="left">N3</td>
-<td align="right">11</td>
-<td align="right">1.00</td>
-<td align="right">3.22</td>
-<td align="right">1.60</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▅▃▂</td>
-</tr>
-<tr class="odd">
-<td align="left">N4</td>
-<td align="right">36</td>
-<td align="right">0.99</td>
-<td align="right">3.19</td>
-<td align="right">1.57</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▃▅▃▂</td>
-</tr>
-<tr class="even">
-<td align="left">N5</td>
-<td align="right">29</td>
-<td align="right">0.99</td>
-<td align="right">2.97</td>
-<td align="right">1.62</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▃▂▂</td>
-</tr>
-<tr class="odd">
-<td align="left">O1</td>
-<td align="right">22</td>
-<td align="right">0.99</td>
-<td align="right">4.82</td>
-<td align="right">1.13</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▁▂▅▇▇</td>
-</tr>
-<tr class="even">
-<td align="left">O2</td>
+<td align="left">item1</td>
 <td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">2.71</td>
-<td align="right">1.57</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="left">▇▂▂▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">O3</td>
-<td align="right">28</td>
+<td align="right">3.53</td>
 <td align="right">0.99</td>
-<td align="right">4.44</td>
-<td align="right">1.22</td>
 <td align="right">1</td>
+<td align="right">3</td>
+<td align="right">4.0</td>
 <td align="right">4</td>
 <td align="right">5</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="left">▂▂▆▇▅</td>
+<td align="left">▁▃▇▇▅</td>
 </tr>
 <tr class="even">
-<td align="left">O4</td>
-<td align="right">14</td>
-<td align="right">1.00</td>
-<td align="right">4.89</td>
-<td align="right">1.22</td>
+<td align="left">item2</td>
+<td align="right">0</td>
 <td align="right">1</td>
+<td align="right">3.34</td>
+<td align="right">0.93</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">3.0</td>
 <td align="right">4</td>
 <td align="right">5</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="left">▁▁▃▆▇</td>
+<td align="left">▁▃▇▇▂</td>
 </tr>
 <tr class="odd">
-<td align="left">O5</td>
-<td align="right">20</td>
-<td align="right">0.99</td>
-<td align="right">2.49</td>
-<td align="right">1.33</td>
+<td align="left">item3</td>
+<td align="right">0</td>
 <td align="right">1</td>
+<td align="right">2.67</td>
+<td align="right">1.08</td>
 <td align="right">1</td>
 <td align="right">2</td>
+<td align="right">2.5</td>
 <td align="right">3</td>
-<td align="right">6</td>
-<td align="left">▇▂▂▁▁</td>
+<td align="right">5</td>
+<td align="left">▂▇▆▃▁</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df_2022)</span></code></pre></div>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">df_2022</td>
 </tr>
 <tr class="even">
-<td align="left">gender</td>
-<td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">1.67</td>
-<td align="right">0.47</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">2</td>
-<td align="right">2</td>
-<td align="left">▃▁▁▁▇</td>
+<td align="left">Number of rows</td>
+<td align="left">80</td>
 </tr>
 <tr class="odd">
-<td align="left">education</td>
-<td align="right">223</td>
-<td align="right">0.92</td>
-<td align="right">3.19</td>
-<td align="right">1.11</td>
+<td align="left">Number of columns</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="19%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="right">0</td>
 <td align="right">1</td>
 <td align="right">3</td>
 <td align="right">3</td>
+<td align="right">0</td>
+<td align="right">80</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="18%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">item1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.56</td>
+<td align="right">1.04</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">4</td>
 <td align="right">4</td>
 <td align="right">5</td>
-<td align="left">▂▂▇▂▃</td>
+<td align="left">▁▃▆▇▅</td>
 </tr>
 <tr class="even">
-<td align="left">age</td>
+<td align="left">item2</td>
 <td align="right">0</td>
-<td align="right">1.00</td>
-<td align="right">28.78</td>
-<td align="right">11.13</td>
+<td align="right">1</td>
+<td align="right">3.67</td>
+<td align="right">1.03</td>
+<td align="right">1</td>
 <td align="right">3</td>
-<td align="right">20</td>
-<td align="right">26</td>
-<td align="right">35</td>
-<td align="right">86</td>
-<td align="left">▃▇▂▁▁</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="left">▁▂▅▇▅</td>
+</tr>
+<tr class="odd">
+<td align="left">item3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.28</td>
+<td align="right">1.04</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="left">▇▇▇▂▁</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="練習用データ作成" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> 練習用データ作成</h1>
-<div id="最初の1000名からランダムにサンプリング" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span>
-最初の1000名からランダムにサンプリング</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># ランダムサンプリングを再現可能にするため</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span> </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">500</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
-<pre><code>## # A tibble: 500 × 29
-##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5    E1    E2
-##    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1 415       3     5     5     6     3     5     2     4     1     5     1     1
-##  2 463       1     5     6     6     5     5     5     6     1     3     3     3
-##  3 179       4     3     4     3     4     4     3     5     4     4     2     4
-##  4 526       6     6     6     6     6     5     6     6     1     1     1     1
-##  5 195       1     5     4     4     4     5     5     5     2     4     3     4
-##  6 938       2     5     6     6     6     5     5     4     1     4     4     1
-##  7 818       2     5     5     5    NA     4     5     5     5     6     1     2
-##  8 118       5     2     2     2     1     2     2     2     3     5     5     6
-##  9 299       4     5     5     6     6     3     5     6     2     1     6     6
-## 10 229       1     5     6     5     5     5     3     4     1     5     2     2
-## # … with 490 more rows, and 16 more variables: E3 &lt;int&gt;, E4 &lt;int&gt;, E5 &lt;int&gt;,
-## #   N1 &lt;int&gt;, N2 &lt;int&gt;, N3 &lt;int&gt;, N4 &lt;int&gt;, N5 &lt;int&gt;, O1 &lt;int&gt;, O2 &lt;int&gt;,
-## #   O3 &lt;int&gt;, O4 &lt;int&gt;, O5 &lt;int&gt;, gender &lt;int&gt;, education &lt;int&gt;, age &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># ランダムサンプリングを再現可能にするため</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">|&gt;</span> </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">500</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>df_2022</span></code></pre></div>
-<pre><code>## # A tibble: 500 × 29
-##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5    E1    E2
-##    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-##  1 142       2     4     5     5     5     4     4     6     4     2     1     2
-##  2 51        1     6     6     6     4     4     3     1     4     2     2     2
-##  3 720       2     5     5     3     2     5     4     6     1     4     3     6
-##  4 730       2     6     5     5     2     4     6     5     2     4     2     6
-##  5 220       5     3     1     2     3     6     2     2     4     5     5     4
-##  6 664       6     1     1     2     3     2     4     2     4     4     3     5
-##  7 826       3     5     5     5     5     5     5     5     2     2     2     1
-##  8 605       2     6     4     6     5     4     4     2     4     4     2     2
-##  9 587       4     5     5     6     5     4     6     6     4     4     1     5
-## 10 352       2     5     5     6     5     5     5     5     1     1     2     2
-## # … with 490 more rows, and 16 more variables: E3 &lt;int&gt;, E4 &lt;int&gt;, E5 &lt;int&gt;,
-## #   N1 &lt;int&gt;, N2 &lt;int&gt;, N3 &lt;int&gt;, N4 &lt;int&gt;, N5 &lt;int&gt;, O1 &lt;int&gt;, O2 &lt;int&gt;,
-## #   O3 &lt;int&gt;, O4 &lt;int&gt;, O5 &lt;int&gt;, gender &lt;int&gt;, education &lt;int&gt;, age &lt;int&gt;</code></pre>
-</div>
-<div id="excel出力" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> excel出力</h2>
-<div id="パッケージが入っていない場合にインストール-2" class="section level3" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span>
-パッケージが入っていない場合にインストール</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;writexl&quot;</span>)</span></code></pre></div>
-</div>
-<div id="dataフォルダを作成してexcel出力" class="section level3" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span>
-dataフォルダを作成してexcel出力</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>) <span class="co"># フォルダ作成</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(df_2021, <span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(df_2022, <span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
-</div>
-<div id="作成データ消去" class="section level3" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> 作成データ消去</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_2021, df_2022)</span></code></pre></div>
+<div id="項目の逆転" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> 項目の逆転</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">item3_r =</span> <span class="fu">case_when</span>(item3 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                             item3 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                             item3 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                             item3 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                             item3 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 確認</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item3, item3_r)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   item3 item3_r     n
+##   &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
+## 1     1       5    12
+## 2     2       4    38
+## 3     3       3    27
+## 4     4       2    17
+## 5     5       1     6</code></pre>
+<div id="年のデータを同じように変換してみよう非表示-1" class="section level3" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span>
+【？】2022年のデータを同じように変換してみよう（非表示）</h3>
 </div>
 </div>
-</div>
-<div id="練習用データの加工" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> 練習用データの加工</h1>
-<div id="パッケージが入っていない場合にインストール-3" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span>
-パッケージが入っていない場合にインストール</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</span></code></pre></div>
-</div>
-<div id="読み込み" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> 読み込み</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2021.xlsx&quot;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/df_2022.xlsx&quot;</span>)</span></code></pre></div>
-</div>
-<div id="列の選択" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> 列の選択</h2>
+<div id="合計得点の作成" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> 合計得点の作成</h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
-<pre><code>## # A tibble: 500 × 14
-##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5 gender
-##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 415       3     5     5     6     3     5     2     4     1     5      2
-##  2 463       1     5     6     6     5     5     5     6     1     3      2
-##  3 179       4     3     4     3     4     4     3     5     4     4      2
-##  4 526       6     6     6     6     6     5     6     6     1     1      2
-##  5 195       1     5     4     4     4     5     5     5     2     4      1
-##  6 938       2     5     6     6     6     5     5     4     1     4      2
-##  7 818       2     5     5     5    NA     4     5     5     5     6      2
-##  8 118       5     2     2     2     1     2     2     2     3     5      1
-##  9 299       4     5     5     6     6     3     5     6     2     1      1
-## 10 229       1     5     6     5     5     5     3     4     1     5      2
-## # … with 490 more rows, and 2 more variables: education &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(ペンギン愛得点 <span class="ot">=</span> item1 <span class="sc">+</span> item2 <span class="sc">+</span> item3_r)</span></code></pre></div>
+<div id="確認-1" class="section level3" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> 確認</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(item1,  item2,  item3_r, ペンギン愛得点)</span></code></pre></div>
+<pre><code>## # A tibble: 100 × 4
+##    item1 item2 item3_r ペンギン愛得点
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+##  1     3     3       1              7
+##  2     3     4       2              9
+##  3     5     3       4             12
+##  4     4     3       3             10
+##  5     4     3       4             11
+##  6     5     3       4             12
+##  7     4     3       4             11
+##  8     2     2       4              8
+##  9     3     3       2              8
+## 10     3     4       4             11
+## # … with 90 more rows</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<div id="ヒストグラム確認" class="section level4" number="2.8.1.1">
+<h4><span class="header-section-number">2.8.1.1</span>
+ヒストグラム確認</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_2021) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(ペンギン愛得点))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="672" /></p>
 </div>
-<div id="行の選択" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> 行の選択</h2>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df_2021</span></code></pre></div>
-<pre><code>## # A tibble: 218 × 14
-##    id       A1    A2    A3    A4    A5    C1    C2    C3    C4    C5 gender
-##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1 179       4     3     4     3     4     4     3     5     4     4      2
-##  2 526       6     6     6     6     6     5     6     6     1     1      2
-##  3 195       1     5     4     4     4     5     5     5     2     4      1
-##  4 818       2     5     5     5    NA     4     5     5     5     6      2
-##  5 118       5     2     2     2     1     2     2     2     3     5      1
-##  6 299       4     5     5     6     6     3     5     6     2     1      1
-##  7 603       3     4     4     6     4     4     4     3     4     4      2
-##  8 768       3     6     6     6     6     6     5     6     2     1      2
-##  9 953       2     4     4     4     6     6     5     5     5     6      2
-## 10 348       5     5     5     6     5     4     5     6     4     3      1
-## # … with 208 more rows, and 2 more variables: education &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
-</div>
-<div id="列名変更" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> 列名変更</h2>
-<ul>
-<li>名前変える必要，本当はないですけどデモンストレーション用に</li>
-<li>あえて冗長に書きます</li>
-</ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(設問<span class="at">_A1 =</span> A1,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A2 =</span> A2,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A3 =</span> A3,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A4 =</span> A4,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_A5 =</span> A5,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C1 =</span> C1,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C2 =</span> C2,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C3 =</span> C3,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4 =</span> C4,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C5 =</span> C5)</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>df_2021  </span></code></pre></div>
-<pre><code>## # A tibble: 218 × 14
-##    id    設問_A1 設問_A2 設問_A3 設問_A4 設問_A5 設問_C1 設問_C2 設問_C3 設問_C4
-##    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1 179         4       3       4       3       4       4       3       5       4
-##  2 526         6       6       6       6       6       5       6       6       1
-##  3 195         1       5       4       4       4       5       5       5       2
-##  4 818         2       5       5       5      NA       4       5       5       5
-##  5 118         5       2       2       2       1       2       2       2       3
-##  6 299         4       5       5       6       6       3       5       6       2
-##  7 603         3       4       4       6       4       4       4       3       4
-##  8 768         3       6       6       6       6       6       5       6       2
-##  9 953         2       4       4       4       6       6       5       5       5
-## 10 348         5       5       5       6       5       4       5       6       4
-## # … with 208 more rows, and 4 more variables: 設問_C5 &lt;dbl&gt;, gender &lt;dbl&gt;,
-## #   education &lt;dbl&gt;, age &lt;dbl&gt;</code></pre>
-</div>
-<div id="逆転項目の作成と確認" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span>
-逆転項目の作成と確認</h2>
-<ul>
-<li>あえて冗長に書きます</li>
-</ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(設問<span class="at">_A1_r =</span> <span class="fu">case_when</span>(</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, <span class="co"># Lがつくのは，整数の型という意味</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                          設問_A1 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L),</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         設問<span class="at">_C4_r =</span> <span class="fu">case_when</span>(</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                          設問_C4 <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div id="確認" class="section level3" number="5.6.1">
-<h3><span class="header-section-number">5.6.1</span> 確認</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="fu">c</span>(<span class="st">&quot;設問_A1&quot;</span>, <span class="st">&quot;設問_C4&quot;</span>)))</span></code></pre></div>
-<pre><code>## # A tibble: 218 × 4
-##    設問_A1 設問_A1_r 設問_C4 設問_C4_r
-##      &lt;dbl&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;
-##  1       4         3       4         3
-##  2       6         1       1         6
-##  3       1         6       2         5
-##  4       2         5       5         2
-##  5       5         2       3         4
-##  6       4         3       2         5
-##  7       3         4       4         3
-##  8       3         4       2         5
-##  9       2         5       5         2
-## 10       5         2       4         3
-## # … with 208 more rows</code></pre>
+<div id="年のデータを同じように変換してみよう非表示-2" class="section level4" number="2.8.1.2">
+<h4><span class="header-section-number">2.8.1.2</span>
+【？】2022年のデータを同じように変換してみよう（非表示）</h4>
+<div id="確認-2" class="section level5" number="2.8.1.2.1">
+<h5><span class="header-section-number">2.8.1.2.1</span> 確認</h5>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_2022) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(ペンギン愛得点))</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="672" /></p>
 </div>
 </div>
-<div id="合計得点の作成" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> 合計得点の作成</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="ot">&lt;-</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>         C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5)</span></code></pre></div>
-<div id="確認-1" class="section level3" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> 確認</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)</span></code></pre></div>
-<pre><code>## # A tibble: 218 × 6
-##    設問_A1_r 設問_A2 設問_A3 設問_A4 設問_A5 A合計
-##        &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-##  1         3       3       4       3       4    17
-##  2         1       6       6       6       6    25
-##  3         6       5       4       4       4    23
-##  4         5       5       5       5      NA    NA
-##  5         2       2       2       2       1     9
-##  6         3       5       5       6       6    25
-##  7         4       4       4       6       4    22
-##  8         4       6       6       6       6    28
-##  9         5       4       4       4       6    23
-## 10         2       5       5       6       5    23
-## # … with 208 more rows</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div>
-<pre><code>## [1] 17</code></pre>
 </div>
 </div>
-<div id="年データ一気に" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span>
-2022年データ一気に</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_2022 <span class="ot">&lt;-</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  df_2022 <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, A1<span class="sc">:</span>C5, gender, education, age) <span class="sc">|&gt;</span> </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">20</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_c</span>(<span class="st">&quot;設問_&quot;</span>, .),</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">c</span>(A1<span class="sc">:</span>C5)) <span class="sc">|&gt;</span> </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(設問_A1, 設問_C4),</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">list</span>(<span class="at">r =</span> <span class="sc">~</span><span class="fu">case_when</span>(</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> 6L, </span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> 5L,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> 4L,</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> 3L,</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> 2L,</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>                    . <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> 1L)</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>           ) <span class="sc">|&gt;</span> </span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>      A合計 <span class="ot">=</span> 設問_A1_r <span class="sc">+</span> 設問_A2 <span class="sc">+</span> 設問_A3 <span class="sc">+</span> 設問_A4 <span class="sc">+</span> 設問_A5,</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>      C合計 <span class="ot">=</span> 設問_C1 <span class="sc">+</span> 設問_C2 <span class="sc">+</span> 設問_C3 <span class="sc">+</span> 設問_C4_r <span class="sc">+</span> 設問_C5</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
-</div>
-<div id="データ連結" class="section level2" number="5.9">
-<h2><span class="header-section-number">5.9</span> データ連結</h2>
+<div id="データ連結" class="section level2" number="2.9">
+<h2><span class="header-section-number">2.9</span> データ連結</h2>
 <ul>
 <li>id列をキーに，両方で同じidを持つ行だけを連結</li>
 <li>先に来る2021年データの列には.x，後に来る2022年データの列には.yがついて識別できるように</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(df_2022, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
-<pre><code>## Rows: 91
-## Columns: 35
-## $ id          &lt;chr&gt; &quot;195&quot;, &quot;818&quot;, &quot;953&quot;, &quot;348&quot;, &quot;649&quot;, &quot;26&quot;, &quot;932&quot;, &quot;590&quot;, &quot;62…
-## $ 設問_A1.x   &lt;dbl&gt; 1, 2, 2, 5, 2, 1, 2, 1, 1, 1, 1, 5, 2, 4, 3, 5, 3, 1, 1, 1…
-## $ 設問_A2.x   &lt;dbl&gt; 5, 5, 4, 5, 4, 6, 4, 5, 6, 6, 6, 5, 5, 6, 4, NA, 6, 5, 6, …
-## $ 設問_A3.x   &lt;dbl&gt; 4, 5, 4, 5, 4, 6, 5, 5, 6, 6, 6, 4, 4, 5, 4, 5, 5, 4, 6, 5…
-## $ 設問_A4.x   &lt;dbl&gt; 4, 5, 4, 6, 5, 1, 3, 6, 4, 6, 6, 5, 6, 6, 5, 6, 6, 2, 6, 5…
-## $ 設問_A5.x   &lt;dbl&gt; 4, NA, 6, 5, 2, 6, 5, 5, 4, 6, 5, 5, 5, 4, 4, 5, 4, 5, 4, …
-## $ 設問_C1.x   &lt;dbl&gt; 5, 4, 6, 4, 5, 5, 4, 5, 5, 6, 5, 4, 3, 5, 5, 6, 3, 1, 4, 5…
-## $ 設問_C2.x   &lt;dbl&gt; 5, 5, 5, 5, 5, 2, 4, 5, 4, 6, 4, 4, 5, 5, 5, 6, 5, 2, 3, 5…
-## $ 設問_C3.x   &lt;dbl&gt; 5, 5, 5, 6, 1, 5, 4, 5, 5, 3, 6, 4, 5, 5, 6, 5, 2, 2, 1, 5…
-## $ 設問_C4.x   &lt;dbl&gt; 2, 5, 5, 4, 1, 1, 4, 3, 4, 6, 2, 2, 1, 4, 1, NA, 3, 2, 4, …
-## $ 設問_C5.x   &lt;dbl&gt; 4, 6, 6, 3, 6, 1, 4, 3, 5, 5, 2, 4, 2, 4, 2, 2, 4, 6, 2, 2…
-## $ gender.x    &lt;dbl&gt; 1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2…
-## $ education.x &lt;dbl&gt; 5, 3, 5, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3…
-## $ age.x       &lt;dbl&gt; 28, 26, 29, 29, 29, 20, 27, 27, 27, 25, 22, 21, 23, 21, 27…
-## $ 設問_A1_r.x &lt;int&gt; 6, 5, 5, 2, 5, 6, 5, 6, 6, 6, 6, 2, 5, 3, 4, 2, 4, 6, 6, 6…
-## $ 設問_C4_r.x &lt;int&gt; 5, 2, 2, 3, 6, 6, 3, 4, 3, 1, 5, 5, 6, 3, 6, NA, 4, 5, 3, …
-## $ A合計.x     &lt;dbl&gt; 23, NA, 23, 23, 20, 25, 22, 27, 26, 30, 29, 21, 25, 24, 21…
-## $ C合計.x     &lt;dbl&gt; 24, 22, 24, 21, 23, 19, 19, 22, 22, 21, 22, 21, 21, 22, 24…
-## $ 設問_A1.y   &lt;dbl&gt; 1, 2, 2, 5, 2, 1, 2, 1, 1, 1, 1, 5, 2, 4, 3, 5, 3, 1, 1, 1…
-## $ 設問_A2.y   &lt;dbl&gt; 5, 5, 4, 5, 4, 6, 4, 5, 6, 6, 6, 5, 5, 6, 4, NA, 6, 5, 6, …
-## $ 設問_A3.y   &lt;dbl&gt; 4, 5, 4, 5, 4, 6, 5, 5, 6, 6, 6, 4, 4, 5, 4, 5, 5, 4, 6, 5…
-## $ 設問_A4.y   &lt;dbl&gt; 4, 5, 4, 6, 5, 1, 3, 6, 4, 6, 6, 5, 6, 6, 5, 6, 6, 2, 6, 5…
-## $ 設問_A5.y   &lt;dbl&gt; 4, NA, 6, 5, 2, 6, 5, 5, 4, 6, 5, 5, 5, 4, 4, 5, 4, 5, 4, …
-## $ 設問_C1.y   &lt;dbl&gt; 5, 4, 6, 4, 5, 5, 4, 5, 5, 6, 5, 4, 3, 5, 5, 6, 3, 1, 4, 5…
-## $ 設問_C2.y   &lt;dbl&gt; 5, 5, 5, 5, 5, 2, 4, 5, 4, 6, 4, 4, 5, 5, 5, 6, 5, 2, 3, 5…
-## $ 設問_C3.y   &lt;dbl&gt; 5, 5, 5, 6, 1, 5, 4, 5, 5, 3, 6, 4, 5, 5, 6, 5, 2, 2, 1, 5…
-## $ 設問_C4.y   &lt;dbl&gt; 2, 5, 5, 4, 1, 1, 4, 3, 4, 6, 2, 2, 1, 4, 1, NA, 3, 2, 4, …
-## $ 設問_C5.y   &lt;dbl&gt; 4, 6, 6, 3, 6, 1, 4, 3, 5, 5, 2, 4, 2, 4, 2, 2, 4, 6, 2, 2…
-## $ gender.y    &lt;dbl&gt; 1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2…
-## $ education.y &lt;dbl&gt; 5, 3, 5, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3…
-## $ age.y       &lt;dbl&gt; 28, 26, 29, 29, 29, 20, 27, 27, 27, 25, 22, 21, 23, 21, 27…
-## $ 設問_A1_r.y &lt;int&gt; 6, 5, 5, 2, 5, 6, 5, 6, 6, 6, 6, 2, 5, 3, 4, 2, 4, 6, 6, 6…
-## $ 設問_C4_r.y &lt;int&gt; 5, 2, 2, 3, 6, 6, 3, 4, 3, 1, 5, 5, 6, 3, 6, NA, 4, 5, 3, …
-## $ A合計.y     &lt;dbl&gt; 23, NA, 23, 23, 20, 25, 22, 27, 26, 30, 29, 21, 25, 24, 21…
-## $ C合計.y     &lt;dbl&gt; 24, 22, 24, 21, 23, 19, 19, 22, 22, 21, 22, 21, 21, 22, 24…</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  df_2021 <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(df_2022, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>## Rows: 80
+## Columns: 11
+## $ ID               &lt;chr&gt; &quot;001&quot;, &quot;002&quot;, &quot;003&quot;, &quot;004&quot;, &quot;005&quot;, &quot;006&quot;, &quot;007&quot;, &quot;009…
+## $ item1.x          &lt;dbl&gt; 3, 3, 5, 4, 4, 5, 4, 3, 3, 4, 4, 4, 3, 5, 1, 4, 3, 2,…
+## $ item2.x          &lt;dbl&gt; 3, 4, 3, 3, 3, 3, 3, 3, 4, 4, 2, 3, 4, 4, 3, 3, 2, 4,…
+## $ item3.x          &lt;dbl&gt; 5, 4, 2, 3, 2, 2, 2, 4, 2, 3, 4, 2, 1, 4, 2, 1, 1, 2,…
+## $ item3_r.x        &lt;dbl&gt; 1, 2, 4, 3, 4, 4, 4, 2, 4, 3, 2, 4, 5, 2, 4, 5, 5, 4,…
+## $ ペンギン愛得点.x &lt;dbl&gt; 7, 9, 12, 10, 11, 12, 11, 8, 11, 11, 8, 11, 12, 11, 8…
+## $ item1.y          &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 1, 5, 5, 4, 2, 3, 3, 4, 2, 5, 5, 4,…
+## $ item2.y          &lt;dbl&gt; 4, 3, 3, 4, 4, 2, 3, 3, 4, 4, 4, 4, 3, 1, 4, 4, 3, 5,…
+## $ item3.y          &lt;dbl&gt; 2, 1, 3, 3, 1, 2, 1, 2, 2, 3, 3, 2, 2, 1, 3, 1, 2, 3,…
+## $ item3_r.y        &lt;dbl&gt; 4, 5, 3, 3, 5, 4, 5, 4, 4, 3, 3, 4, 4, 5, 3, 5, 4, 3,…
+## $ ペンギン愛得点.y &lt;dbl&gt; 11, 11, 9, 9, 12, 10, 9, 12, 13, 11, 9, 11, 10, 10, 9…</code></pre>
 </div>
-<div id="rename" class="section level2" number="5.10">
-<h2><span class="header-section-number">5.10</span> rename</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.x&quot;</span>, <span class="st">&quot;_2021&quot;</span>),</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;x&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.y&quot;</span>, <span class="st">&quot;_2022&quot;</span>),</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;y&quot;</span>))</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
-<pre><code>## Rows: 91
-## Columns: 35
-## $ id             &lt;chr&gt; &quot;195&quot;, &quot;818&quot;, &quot;953&quot;, &quot;348&quot;, &quot;649&quot;, &quot;26&quot;, &quot;932&quot;, &quot;590&quot;, …
-## $ 設問_A1_2021   &lt;dbl&gt; 1, 2, 2, 5, 2, 1, 2, 1, 1, 1, 1, 5, 2, 4, 3, 5, 3, 1, 1…
-## $ 設問_A2_2021   &lt;dbl&gt; 5, 5, 4, 5, 4, 6, 4, 5, 6, 6, 6, 5, 5, 6, 4, NA, 6, 5, …
-## $ 設問_A3_2021   &lt;dbl&gt; 4, 5, 4, 5, 4, 6, 5, 5, 6, 6, 6, 4, 4, 5, 4, 5, 5, 4, 6…
-## $ 設問_A4_2021   &lt;dbl&gt; 4, 5, 4, 6, 5, 1, 3, 6, 4, 6, 6, 5, 6, 6, 5, 6, 6, 2, 6…
-## $ 設問_A5_2021   &lt;dbl&gt; 4, NA, 6, 5, 2, 6, 5, 5, 4, 6, 5, 5, 5, 4, 4, 5, 4, 5, …
-## $ 設問_C1_2021   &lt;dbl&gt; 5, 4, 6, 4, 5, 5, 4, 5, 5, 6, 5, 4, 3, 5, 5, 6, 3, 1, 4…
-## $ 設問_C2_2021   &lt;dbl&gt; 5, 5, 5, 5, 5, 2, 4, 5, 4, 6, 4, 4, 5, 5, 5, 6, 5, 2, 3…
-## $ 設問_C3_2021   &lt;dbl&gt; 5, 5, 5, 6, 1, 5, 4, 5, 5, 3, 6, 4, 5, 5, 6, 5, 2, 2, 1…
-## $ 設問_C4_2021   &lt;dbl&gt; 2, 5, 5, 4, 1, 1, 4, 3, 4, 6, 2, 2, 1, 4, 1, NA, 3, 2, …
-## $ 設問_C5_2021   &lt;dbl&gt; 4, 6, 6, 3, 6, 1, 4, 3, 5, 5, 2, 4, 2, 4, 2, 2, 4, 6, 2…
-## $ gender_2021    &lt;dbl&gt; 1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2…
-## $ education_2021 &lt;dbl&gt; 5, 3, 5, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3…
-## $ age_2021       &lt;dbl&gt; 28, 26, 29, 29, 29, 20, 27, 27, 27, 25, 22, 21, 23, 21,…
-## $ 設問_A1_r_2021 &lt;int&gt; 6, 5, 5, 2, 5, 6, 5, 6, 6, 6, 6, 2, 5, 3, 4, 2, 4, 6, 6…
-## $ 設問_C4_r_2021 &lt;int&gt; 5, 2, 2, 3, 6, 6, 3, 4, 3, 1, 5, 5, 6, 3, 6, NA, 4, 5, …
-## $ A合計_2021     &lt;dbl&gt; 23, NA, 23, 23, 20, 25, 22, 27, 26, 30, 29, 21, 25, 24,…
-## $ C合計_2021     &lt;dbl&gt; 24, 22, 24, 21, 23, 19, 19, 22, 22, 21, 22, 21, 21, 22,…
-## $ 設問_A1_2022   &lt;dbl&gt; 1, 2, 2, 5, 2, 1, 2, 1, 1, 1, 1, 5, 2, 4, 3, 5, 3, 1, 1…
-## $ 設問_A2_2022   &lt;dbl&gt; 5, 5, 4, 5, 4, 6, 4, 5, 6, 6, 6, 5, 5, 6, 4, NA, 6, 5, …
-## $ 設問_A3_2022   &lt;dbl&gt; 4, 5, 4, 5, 4, 6, 5, 5, 6, 6, 6, 4, 4, 5, 4, 5, 5, 4, 6…
-## $ 設問_A4_2022   &lt;dbl&gt; 4, 5, 4, 6, 5, 1, 3, 6, 4, 6, 6, 5, 6, 6, 5, 6, 6, 2, 6…
-## $ 設問_A5_2022   &lt;dbl&gt; 4, NA, 6, 5, 2, 6, 5, 5, 4, 6, 5, 5, 5, 4, 4, 5, 4, 5, …
-## $ 設問_C1_2022   &lt;dbl&gt; 5, 4, 6, 4, 5, 5, 4, 5, 5, 6, 5, 4, 3, 5, 5, 6, 3, 1, 4…
-## $ 設問_C2_2022   &lt;dbl&gt; 5, 5, 5, 5, 5, 2, 4, 5, 4, 6, 4, 4, 5, 5, 5, 6, 5, 2, 3…
-## $ 設問_C3_2022   &lt;dbl&gt; 5, 5, 5, 6, 1, 5, 4, 5, 5, 3, 6, 4, 5, 5, 6, 5, 2, 2, 1…
-## $ 設問_C4_2022   &lt;dbl&gt; 2, 5, 5, 4, 1, 1, 4, 3, 4, 6, 2, 2, 1, 4, 1, NA, 3, 2, …
-## $ 設問_C5_2022   &lt;dbl&gt; 4, 6, 6, 3, 6, 1, 4, 3, 5, 5, 2, 4, 2, 4, 2, 2, 4, 6, 2…
-## $ gender_2022    &lt;dbl&gt; 1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2…
-## $ education_2022 &lt;dbl&gt; 5, 3, 5, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3…
-## $ age_2022       &lt;dbl&gt; 28, 26, 29, 29, 29, 20, 27, 27, 27, 25, 22, 21, 23, 21,…
-## $ 設問_A1_r_2022 &lt;int&gt; 6, 5, 5, 2, 5, 6, 5, 6, 6, 6, 6, 2, 5, 3, 4, 2, 4, 6, 6…
-## $ 設問_C4_r_2022 &lt;int&gt; 5, 2, 2, 3, 6, 6, 3, 4, 3, 1, 5, 5, 6, 3, 6, NA, 4, 5, …
-## $ A合計_2022     &lt;dbl&gt; 23, NA, 23, 23, 20, 25, 22, 27, 26, 30, 29, 21, 25, 24,…
-## $ C合計_2022     &lt;dbl&gt; 24, 22, 24, 21, 23, 19, 19, 22, 22, 21, 22, 21, 21, 22,…</code></pre>
+<div id="rename" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> rename</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(ペンギン愛得点<span class="at">_2021 =</span> ペンギン愛得点.x,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         ペンギン愛得点<span class="at">_2022 =</span> ペンギン愛得点.y)</span></code></pre></div>
+<pre><code>## # A tibble: 80 × 11
+##    ID    item1.x item2.x item3.x item3_r.x ペンギン愛得点_2021 item1.y item2.y
+##    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;               &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 001         3       3       5         1                   7       3       4
+##  2 002         3       4       4         2                   9       3       3
+##  3 003         5       3       2         4                  12       3       3
+##  4 004         4       3       3         3                  10       2       4
+##  5 005         4       3       2         4                  11       3       4
+##  6 006         5       3       2         4                  12       4       2
+##  7 007         4       3       2         4                  11       1       3
+##  8 009         3       3       4         2                   8       5       3
+##  9 010         3       4       2         4                  11       5       4
+## 10 012         4       4       3         3                  11       4       4
+## # … with 70 more rows, and 3 more variables: item3.y &lt;dbl&gt;, item3_r.y &lt;dbl&gt;,
+## #   ペンギン愛得点_2022 &lt;dbl&gt;</code></pre>
+<div id="効率化-1" class="section level3" number="2.10.1">
+<h3><span class="header-section-number">2.10.1</span> 【効率化】</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_all <span class="ot">&lt;-</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.x&quot;</span>, <span class="st">&quot;_2021&quot;</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;x&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;.y&quot;</span>, <span class="st">&quot;_2022&quot;</span>),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ends_with</span>(<span class="st">&quot;y&quot;</span>))</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>df_all <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>## Rows: 80
+## Columns: 11
+## $ ID                  &lt;chr&gt; &quot;001&quot;, &quot;002&quot;, &quot;003&quot;, &quot;004&quot;, &quot;005&quot;, &quot;006&quot;, &quot;007&quot;, &quot;…
+## $ item1_2021          &lt;dbl&gt; 3, 3, 5, 4, 4, 5, 4, 3, 3, 4, 4, 4, 3, 5, 1, 4, 3,…
+## $ item2_2021          &lt;dbl&gt; 3, 4, 3, 3, 3, 3, 3, 3, 4, 4, 2, 3, 4, 4, 3, 3, 2,…
+## $ item3_2021          &lt;dbl&gt; 5, 4, 2, 3, 2, 2, 2, 4, 2, 3, 4, 2, 1, 4, 2, 1, 1,…
+## $ item3_r_2021        &lt;dbl&gt; 1, 2, 4, 3, 4, 4, 4, 2, 4, 3, 2, 4, 5, 2, 4, 5, 5,…
+## $ ペンギン愛得点_2021 &lt;dbl&gt; 7, 9, 12, 10, 11, 12, 11, 8, 11, 11, 8, 11, 12, 11…
+## $ item1_2022          &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 1, 5, 5, 4, 2, 3, 3, 4, 2, 5, 5,…
+## $ item2_2022          &lt;dbl&gt; 4, 3, 3, 4, 4, 2, 3, 3, 4, 4, 4, 4, 3, 1, 4, 4, 3,…
+## $ item3_2022          &lt;dbl&gt; 2, 1, 3, 3, 1, 2, 1, 2, 2, 3, 3, 2, 2, 1, 3, 1, 2,…
+## $ item3_r_2022        &lt;dbl&gt; 4, 5, 3, 3, 5, 4, 5, 4, 4, 3, 3, 4, 4, 5, 3, 5, 4,…
+## $ ペンギン愛得点_2022 &lt;dbl&gt; 11, 11, 9, 9, 12, 10, 9, 12, 13, 11, 9, 11, 10, 10…</code></pre>
 </div>
-<div id="widelong形式データに" class="section level2" number="5.11">
-<h2><span class="header-section-number">5.11</span>
+</div>
+<div id="widelong形式データに" class="section level2" number="2.11">
+<h2><span class="header-section-number">2.11</span>
 wide→long形式データに</h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id,</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         gender_2021, education_2021, age_2021,</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>         <span class="fu">contains</span>(<span class="st">&quot;合計&quot;</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(id, gender_2021<span class="sc">:</span>age_2021),   <span class="co"># longにする列は!c()に指定した列以外</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;year&quot;</span>),  </span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span>  <span class="st">&quot;(.*)_(.*)&quot;</span>)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>df_long</span></code></pre></div>
-<pre><code>## # A tibble: 182 × 7
-##    id    gender_2021 education_2021 age_2021 year  A合計 C合計
-##    &lt;chr&gt;       &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 195             1              5       28 2021     23    24
-##  2 195             1              5       28 2022     23    24
-##  3 818             2              3       26 2021     NA    22
-##  4 818             2              3       26 2022     NA    22
-##  5 953             2              5       29 2021     23    24
-##  6 953             2              5       29 2022     23    24
-##  7 348             1              3       29 2021     23    21
-##  8 348             1              3       29 2022     23    21
-##  9 649             2              3       29 2021     20    23
-## 10 649             2              3       29 2022     20    23
-## # … with 172 more rows</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  df_all <span class="sc">|&gt;</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(ID),   <span class="co"># longにする列は!c()に指定した列以外</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;year&quot;</span>),  </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span>  <span class="st">&quot;(.*)_(.*)&quot;</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>df_long</span></code></pre></div>
+<pre><code>## # A tibble: 160 × 7
+##    ID    year  item1 item2 item3 item3_r ペンギン愛得点
+##    &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+##  1 001   2021      3     3     5       1              7
+##  2 001   2022      3     4     2       4             11
+##  3 002   2021      3     4     4       2              9
+##  4 002   2022      3     3     1       5             11
+##  5 003   2021      5     3     2       4             12
+##  6 003   2022      3     3     3       3              9
+##  7 004   2021      4     3     3       3             10
+##  8 004   2022      2     4     3       3              9
+##  9 005   2021      4     3     2       4             11
+## 10 005   2022      3     4     1       5             12
+## # … with 150 more rows</code></pre>
+</div>
+<div id="箱ひげ図" class="section level2" number="2.12">
+<h2><span class="header-section-number">2.12</span> 箱ひげ図</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(ペンギン愛得点, year))</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAABWVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrYzMzM6AAA6ADo6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kLY6kNtNTU1NTW5NTY5Nbm5Nbo5NbqtNjshmAABmADpmOgBmOjpmOmZmOpBmZjpmZmZmZpBmkGZmkJBmkLZmkNtmtttmtv9uTU1ubk1ubo5ujqtujshuq+SOTU2Obk2Obm6Oq6uOyOSOyP+QOgCQOjqQZjqQZmaQkGaQkLaQtraQttuQtv+Q2/+rbk2rjm6ryOSr5P+2ZgC2Zjq2kDq2kGa2kJC2tpC2tra2ttu2tv+229u22/+2///Ijk3Ijm7Iq27I5P/I///bkDrbkGbbkJDbtmbbtpDbtrbbttvb27bb29vb2//b/7bb///kq27kyI7kyKvk5Mjk///r6+v/tmb/tpD/yI7/25D/27b/29v/5Kv/5Mj//7b//8j//9v//+T///+m2UVvAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO2d/ZskRnVeZ0F4N6wCmJEjIJBYDgSUgGXHEBFMDLawQdiwirwOcliiNSGbXX2O9v//Id09PV/11iK4mq46pT3neUAazUj1zntvHfVM94yOHouISImj2QFERFZFgYqIFFGgIiJFFKiISBEFKiJSRIGKiBRRoCIiRRSoiEgRBSoiUkSBiogUUaAiIkUUqIhIEQUqIlJkhkD/b4nq33cAMEnsJLGTxE6SuocU6EcFk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewkefz4pgSzp3IOaE+qf58C/ahgkthJMltVTGZP5RzMnijQeWCS2Ely8+aEle6xE9fsEKco0ESBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnijQeWCS2ElCkZYC7YLZEwU6D0wSO0ko0lKgXTB7okDngUliJwlFWgq0C2ZPFOg8MEnsJKFIS4F2weyJAp0HJomdJBRpKdAumD1RoPPAJLGThCItBdoFsycKdB6YJHaSUKSlQLtg9kSBzgOTxE4SirQUaBfMnswU6K///Pj4uW++fvrGBz988fj47I0r77nyxiXGfsIHAJPEThKKtBRoF8yeTBToa8c7nvub7Rvvv7R744/+Md5z5Y3LjP2EDwAmiZ0kFGkp0C6YPZkn0IfHz/3F48fv/uBUmneOv/D69o0v/KZ5z9UPu0wp93Yba5/x9bP8EhwATBKKtBRoF8yeTBPoBz84/vb2j5uHnps/vvPizo/vv7R5oHnlPVc/7AqV2LttpKzB8ktwADBJKNJSoF0wezJNoO+/tH9Ieef4Tx8/vn/8xd0b9zdvXHnP1Q+7QiH1zZskgy6/BAcAk4QiLQXaBbMn85+F35nxzv7x5cO9SC/e031jx+8f+uZNlEGXX4IDgElCkZYC7YLZk+kC3X/Vvn+O6J0Xt98EvfSezhtnEvz9z7oQaDnux5Obksweyh5QlskDYXI91dYFuvvivSvQ+5cfjV56o578uj/rjw0zFg/P7KHsAWWZPBAm11NtWaAPd69PuiTQ8yfbH15+5dLDa3kZ08VnXXvYfc0s/2XIAcAkoUiLJdDZUzkHsyeTv4R/+OJz229+dh6B7t/TeeOMQmqUP9dfggOASUKRlgLtgtmTuQK9v39gmQK9f/kh5/3O409fxnR9KNCEIi0F2gWzJ1MF+tq5GNtn4V+7rMzXuv70hfTXhgJNKNJSoF0wezJRoB/cOX7+7Bue9/cvUjr94+X3XH3jMmM/4QOASWInCUVaCrQLZk8mCvTO8cUz7pd/Eunqe66+cZmxn/ABwCSxk4QiLQXaBbMn8wR6/7IYP/jB8fPnPwt/5T33n+RPBXpt2ElCkZYC7YLZk4k/ynl8xvbbnu9e/DamK+9pPuwyYz/hA4BJYicJRVoKtAtmT6YJ9OHxVTO++8PNn33zN+172g+7xNhP+ABgkthJQpGWAu2C2ZPpP8pZZ+wnfAAwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkoUhLgXbB7IkCnQcmiZ0kFGkp0C6YPVGg88AksZOEIi0F2gWzJwp0HpgkdpJQpKVAu2D2RIHOA5PEThKKtBRoF8yeKNB5YJLYSUKRlgLtgtkTBToPTBI7SSjSUqBdMHuiQOeBSWInCUVaCrQLZk8U6DwwSewkuSkdZk/lHMyeKNB5YJLYSTJbVUxmT+UczJ4o0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSHFagr3z2Zwr0iWCS2EliJ4mdJAcV6HtfOvqGAn0imCR2kthJYifJgQX6iZ8r0CeCSWIniZ0kdpIcVKAn37nxVwr0iWCS2EliJ4mdJIf9Hujdo08d7pugYz/hA4BJYieJnSR2khxWoG//7dHRJz/zwp4/eVOBXgaTxE4SO0nsJDn0k0iXueZviI79hA8AJomdJHaS2EmiQOeBSWIniZ0kdpL4Qvp5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2ElyeIGe3Nvzxr/3e6BXwCSxk8ROEjtJDizQt172SaQngkliJ4mdJHaSHFagV5+G/5QCvQImiZ0kdpLYSXLon0Q6uvGZP761/d/Rja9fqz4V6PVhJ4mdJHaSHPhn4Y8+9eb2/7+x+6nO6/1BJAV6bdhJYieJnSQHfiH97peJ3D36/Ob/X7nuX2039hM+AJgkdpLYSWInyYhfZ/fg6A/O/1+BXoBJYieJnSR2kowR6Par9/e+dM1fw4/9hA8AJomdJHaS2Eky4veBPrq19ei1/3blsZ/wAcAksZPEThI7SQ7830Tafffz9FuhpxpVoBdgkthJYieJnSSHFeijW0ef/dn2afjPb2Xql/BXwSSxk8ROEjtJDvyTSK/sfv7owdHRjVtHu0ejCvQCTBI7SewksZPk0D8L/0/bL9xPXtn9IJKvA70KJomdJHaS2Ely+F8m8r823jz5xe3bX7tmfyrQa8NOEjtJ7CTx19nNA5PEThI7SewkGSHQk18p0B6YJHaS2EliJ8nBBfrGV7bPI733b6/9K3gFem3YSWIniZ0kBxboyY9OfxHoe186euZ6XwWqQK8PO0nsJLGT5PAvY3rmP9z6xM9P/qvPwgeYJHaS2EliJ8lhBfrg6Ojr+5/h/MUtfxtTAyaJnSR2kthJMuBHOfc/BH/X38bUgEliJ4mdJHaSDPhlInuB+rPwLZgkdpLYSWInyYBfZ7cXqL+NqQWTxE4SO0nsJFGg88AksZPEThI7SQ7930T6RvNrlRXoBZgkdpLYSWInyWGfRNo9cXQq0I1MfRLpKpgkdpLYSWInycF/H+jn3twJ9K0vH+1+O70CvQCTxE4SO0nsJDnwC+nvHh0d3b514zOfPrr2XweqQK8NO0nsJLGT5PC/D/Roz3X7U4FeG3aS2EliJ8nBf5nI2393e2PPT372Z9ftTwV6bdhJYieJnST+PtB5YJLYSWIniZ0kCnQemCR2kthJYifJYV9I/28/d5jfpaxArxU7SewksZPkwD+JdHT0yev/TcoK9Jqxk8ROEjtJDvuTSLtfp3z0zPcP4tCxn/ABwCSxk8ROEjtJDv090F9+ZefQZ7+vQANMEjtJ7CSxk2TAk0hvnDr02l/INPYTPgCYJHaS2EliJ8mQZ+FP3vjyVqE3vnatTymN/YQPACaJnSR2kthJMuplTG+/vPuRpGev8WHo2E/4AGCS2EliJ4mdJGMegf7dp89+oPPocwr0DEwSO0nsJLGT5PACPbPn9rn4t390jT8TP/YTPgCYJHaS2EliJ8mBBbr/7ufFq0Gv8dcqj/2EDwAmiZ0kdpLYSXLo30jfPnl0jf9hj7Gf8AHAJLGTxE4SO0kO/pNIN66+fOm9L/kI9AxMEjtJ7CSxk+TAAv3sPzR/6eSn1/ZSprGf8AHAJLGTxE4SO0n8bUzzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AksZPEThI7SRToPDBJ7CSxk8ROEgU6D0wSO0nsJLGTRIHOA5PEThI7SewkUaDzwCSxk8ROEjtJFOg8MEnsJLGTxE4SBToPTBI7SewksZNEgc4Dk8ROEjtJ7CRRoPPAJLGTxE4SO0kU6DwwSewksZPEThIFOg9MEjtJ7CSxk0SBzgOTxE4SO0nsJFGg88AkIXVyUwoMGg5oT2YHOEOBzgOThNPJbBGtypjpcPZk/bujQD86mCScTm7enLBIB2PntiHnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0org1lLIAACAASURBVEBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjFCBFsAk4XSiQGvnjJkOZ0/WvzvNCBVoAUwSTicKtHbOmOlw9mT9u9OMUIEWwCThdKJAa+eMmQ5nT9a/O80IFWgBTBJOJwq0ds6Y6XD2ZP2704xQgRbAJOF0okBr54yZDmdP1r87zQgVaAFMEk4nCrR2zpjpcPZk/bvTjLAk0F//+fHxc998/fSND3744vHx2RtX3rPh/Ze+mH/72E/4AGCScDpRoLVzxkyHsyfr351mhBWBvna847m/2b7x/ku7N/7oH+M9W+4cK9ADwulEgdbOGTMdzp6sf3eaERYE+vD4ub94/PjdH5xK887xF17fvvGF37Tv2Tw4vXOsQA8JpxMFWjtnzHQ4e7L+3WlG+PsL9IMfHH97+8fNQ8/NH995cSfL91/aPOq8+p7N1/N/dqxADwqnEwVaO2fMdDh7sv7daUb4+wv0/Zf2jy/vHP/p48f394a8v3nj6ns2f+n4W/+iQA8JpxMFWjtnzHQ4e7L+3WlG+BGehd9p8s7pg83NV+9fbN7z+P7zf331L58x9hM+AJgknE4UaO2cMdPh7Mn6d6cZYV2g+6/a908YvfPi9pugl95zyhWB3txTPPCmkClOFcmoT2jyyGYwoNWh1AW6++K9K9D7F9ZUoE8NxakiGfUJTR7ZDAa0OpSyQB/uXqx0SaD773+evefsz/0S/oBwOvl43YxRV90v4ecx+Uv4hy8+t/3mZ+cR6P49+zcU6CHhdKJAa+eMmQ5nT9a/O80IiwK9v3+UmQK9f+nxpwI9MJxOFGjtnDHT4ezJ+nenGWFNoK+dW7J9Fv61K/5UoIeF04kCrZ0zZjqcPVn/7jQjrAj0gzvHz599w/P+7hVLZ3+8/J4dCvSgcDpRoLVzxkyHsyfr351mhBWB3jm+eMb98k8iXX3PDgV6UDidKNDaOWOmw9mT9e9OM8KCQO9ftuQHPzh+/vxn4e+3/lSgh4XTiQKtnTNmOpw9Wf/uNCOs/Cjn8RlbOb578duYmvdsUaAHhdOJAq2dM2Y6nD1Z/+40I/z9Bfrw+Kom3/3h5s+++ZvOex4r0APD6USB1s4ZMx3Onqx/d5oR+hvpC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6UaC1c8ZMh7Mn69+dZoQKtAAmCacTBVo7Z8x0OHuy/t1pRqhAC2CScDpRoLVzxkyHsyfr351mhAq0ACYJpxMFWjtnzHQ4e7L+3WlGqEALYJJwOlGgtXPGTIezJ+vfnWaECrQAJgmnEwVaO2fMdDh7sv7daUaoQAtgknA6uSklxkyHsyfr3x0F+tHBJOF0MltEqzJmOpw9Wf/uKNCPDiaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSKNB5YJLYSWIniZ0kCnQemCR2kthJYieJAp0HJomdJHaS2EmiQOeBSWIniZ0kdpIo0HlgkthJYieJnSQKdB6YJHaS2EliJ4kCnQcmiZ0kdpLYSaJA54FJYieJnSR2kijQeWCS2EliJ4mdJAp0HpgkdpLYSWIniQKdByaJnSR2kthJokDngUliJ4mdJHaSLCzQGjdvzk7Aw04SO0nsJLmmThToythJYieJnSQKVOykg50kdpIoULGTDnaS2EmiQMVOOthJYieJAhU76WAniZ0kClTspIOdJHaSKFCxkw52kthJ8tQJVEQEhgIVESmiQEVEiihQEZEiClREpIgCFREpokBFRIooUBGRIosI9IPXXjw+/jd/MTsGinf//Pj4+Juvz47B4f2Xvrj/sw9++KLV7Ljo5NebdXnOTh5f7mTLOy9+4Tcf4R+2hkDffel4x7dmBwHxzou7Sp77m9lBMNw53l+M90/X5Y/+cW4eAuedvHbsuuw572TLBz84/vgLdPNJPv/64w/+h+O/YDv41x+/+xHH/zHigzvHZxfjjtWcctHJw+PnNl+/bTp56v+tcmlPttw/fgoE+nA/9vuXP/OnnHde3HXy/kv+S2XHr//s+OxiWM2ei042/7r99vaPm8fm356baTaX9mTL9uu4j71Az6Yvl3h49WY87WweSHzrX/YX4/75H/90ZqTpXOrk/Zf2jzzv2Mn5njzeXZ//8vH/Huj59OUCH2Zd4f7zf33275SNJE7/nfLwKf+C5XInZzz1Ar3ayZ3jLz4FTyJtP8V/+U/Hx5vPXc44/x7o0y2Jy5w/KN//O+UjXo2PBY1A/fft48udPNx8+f50CPSHp88hPt3/9rzKB6fPq37rqXfEOQo0aQTqswiPL3Wy+9fJUyDQh6ee2BjDf31e8M6f7QT6/Ouzg2BIgfqtn6sCfegNenypk933M54OgZ4+9Lzjvz/PeedF/6XS4CPQ5IpAH774nM84XnRyf/f8+1Mg0Hde9EYEd/yXSosCTS4L9L7/st2x72SvladCoPsvxfya7BwtkfgsfHKpA79Y2bPv5P7xOR9BKysI9FwWD/3ZkjMUaPKwef3n0/460C3nAv3gzvHzPvrY8dQJ9PzL1Kf9RWyX8Uv44EwWvkT2gktPmPgv2j1XvzJ5Cr6E3z5h8s3XfcLkCg99ZULL2cU4/dUJ/iz8lqtPmMiWp0+gjx/uf/OQzyFecPYViA/Kzzi/GO/625jOeHj2o5znX676BctTKNDH725/weN/fn12DBT/Z/v7QO3kgouL8e72By++6UOu804eHivQc55GgYqI8FCgIiJFFKiISBEFKiJSRIGKiBRRoCIiRRSoiEgRBSoiUkSBiogUUaCyJm/fe3xyb3YIedpRoLIkJ9+58Vev3Pirgx5x796bh/zny8cABSoM3vjKs9//8I966+Xb/333J7+zQO/d++WrP3nhj2/fOvrEzy//9Vee+dnjxz+6fcE32r/z7tFhBS0fAxSoIHjl6MbRUTgseHTr6PO7P/kwgf6/P9448dbRFf7g0vvvHh394fbUCxSo/P4oUCHw6NYfbJz4qdMvmf/5Z0/8uPe+tNfghUD7H/1oL88bt28/+8IL33v11Z9e+Ybpg1u7f84r59q8q0ClgAIVAg+2rrp7KqwHRze+9sRvPr5ytLfs2ZNIT/rot+9t2Pzx5Me7dz+6dePrF+98tP+C/pWjr9875W97Au0/eBU5R4HKXE5e/embWw3+wZsn39lJ7eRHG2E986QHoXc35jv55U9euH3rVHi/5aP/dvdl+YNT+115OPmLW/u3PuRLeAUqH4IClalsv9R+5ud7lX3+9K9t/PaEr55PfvnyudP2H/zkj958uf+Jn23/yRu/bv78XJBb527+hrfe3L5v8/X9ji/7JbwUUKAyk5Pv7B/fnbzxv/RzdgAABTNJREFUwgvnz8K/9eWN4s6FdvrNy7d+/MLti0eEn3z2q//wWz765J9f3fDjr+7+/3ub//vO0TN/uX1j9zc92Cr15Dub//N7oPLRUKAyk42kvvZyimrr1bOvmt/70u4r9Afn8vzsT3/1YR+9ecDZ5/TDXn1z972An33Y90AVqHwIClQmsntSfeO/T7VPA50/I3/+yqVHtz75ma/99FfnT8P/1o/efNTZ1+aX+fTF3/tg903P/vdAH31l98LQW5sHuvvXiH7uOj9p+RihQGUir+yeDH9w8Q3Nc07Oldo8EHwlbZsfffYtz3+6/YcnL+/V+Pabm7/3TKBvnXr4ny7Z9eKQR7f6D1xFWhSozOPsZfGv/JbX0LePT+82P1HU/eidQH/09Tfvbv75ewHfPXrmZ+cC3T6/9OR/yibWH756wU9uKVB5AgpUprGx3anGfpvPzn/2aM+D8wek9376xI9+7yu3v7H5wK9vBfrelz/3q5Pv/Ov//eWjT/zl6ZNIu6edPvHzu+3jzLODNv+Qyz7vftdAZIsClWncPX/gufkivvOF+Y5XmqdyNnb7+i9/8t3tdyg70r346I32to8+P7d/4xM/3/yFZ35+9o9QoHItKFCZxcZT59Z85UnfZ3x09evne6++fPENynyS/OKjT3bfK71w5OaNR7c+tXvB/cbWN/7b9vX498755ZdufP/e+S9fUqDyu6JAZRIbL10YcPu6o893PmjzVf7+g/aPOs/c+exXX83fBnrx0Y8f/+Jfbf7s5OXdT8Pfvv3s9i/fOzvrxl89uPrwdfuXLt7aPsi9d9muClSegAKVOWxfvPn5ize3X1Z3nki6e/ZB56/svLF5NPnkn/NsLHzSfc7+rTcfbwV6+TVMV17J5LPw8ruiQGUSD6667cHlHyc64xfn3xvd+PaTp486n/w0/C/a76Se/pzTnis/MP9hAr1x6ReFflqBypNQoDKL/3nVg6/kNzXv9r7P+eBJPyDUfvTJL648krxx+fc1P+h+D3T/zkdfufLblU+++8J//N0/K3mqUKAC4aQ16Fsv9x6Utk/xPOmjf7l9tun2rdN/4smPGuvuvwe6+4H4x+33QN+6eKz6xt9v3/4T/9Me0keBCoXtF9wXX4Kf/N0TfsvS7vVJ8fe2H739+vyZ7+9eE//m4ze+3H4rdC/QB7d2v7CpEej2G6e7l+KfvlD18qsFRK6gQAXDJY2d/tq67rNFG6u135LsfPSj21/b/cqRt758dOP20daiVzh7Fv7B6W9WviLQ3WuhTl+7dPpDpk98jZU89ShQ4fDW3+/+/8dfOX3W5wn/kbmrz6x/yEe/vX1oenTja81rns5fxnSqyMsC3T4Q/sb+Z0I3Gj39/9/hP9ckTyMKVGg8+K36bJ+Gf+JH3/vlq9/dufXZ01/C/MlnX3jhL1998+zvOvtn/Gj7X/q4LNC7u28knH71vn9h6YPuTz2JKFDBsf1ddN/7Ld90fHDl8WD/o89/e+gz2/edvPGVix9I2r//khEf3P70xfdP9y9I3f+c/ukrS5vXrIqcoUBlNR79u6/+6kM/ZvvLPD/zvX+4+Cv3fvLdjSc/v3/rikAfXX4C6uRHu2947gX64Gj3X6t/8Nkn/4dC5WlGgcrHkrd/+/Pmj1649NKk7X8A5JKST//WD/kHiGxRoCIiRRSoiEgRBSoiUkSBiogUUaAiIkUUqIhIEQUqIlJEgYqIFFGgIiJFFKiISBEFKiJSRIGKiBRRoCIiRRSoiEgRBSoiUkSBiogUUaAiIkX+P3pcDkZJWVmqAAAAAElFTkSuQmCC" width="672" /></p>
 </div>
 </div>
 

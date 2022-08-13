@@ -11,101 +11,84 @@ output:
     theme: readable
     highlight: pygments
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-# パッケージ読み込み
-```{r}
+# データ作成（非表示）
+
+<!-- * https://bookdown.org/ndphillips/YaRrr/generating-random-data.html -->
+
+<!-- https://declaredesign.org/r/fabricatr/articles/getting_started.html -->
+
+<!-- https://rviews.rstudio.com/2020/09/09/fake-data-with-r/ -->
+
+
+
+```{r eval=FALSE, include=FALSE}
 library(tidyverse)
-```
+library(fabricatr)
 
-## パッケージが入っていない場合にインストール
-```{r eval = FALSE}
-install.packages("psychTools")
-```
+levels <-  c("全くあてはまらない", "どちらかといえばあてはまらない", "どちらともいえない", "どちらかといえばあてはまる", "非常にあてはまる")
 
-# サンプルデータ読み込みと先頭の表示
+breakp <- c(-1.5, -0.5, 0.5, 1.5)
 
-```{r}
-df <- 
-  psychTools::bfi
+set.seed(123)
+df_2021 <-
+  fabricate(
+    N = 100,
+    # id = 1:100,
+    item1 = draw_ordered(x = rnorm(n = 100, mean = 0.45, sd = 1.1), breaks = breakp, break_labels = levels),
+    item2 = draw_ordered(x = rnorm(n = 100, mean = 0.5, sd = 1), breaks = breakp, break_labels = levels),
+    item3 = draw_ordered(x = rnorm(n = 100, mean = -0.55, sd = 1.2), breaks = breakp, break_labels = levels)
+  )
 
-df |> head()
-```
-
-## 便利なtibble形式に変換しておく
-```{r}
-df <- 
-  as_tibble(df)
-```
-
-### （応用)列のインデックスをidに
-```{r}
-df <- 
-  df |> 
-  rownames_to_column(var = "id")
-```
+df_2022 <-
+  fabricate(
+    N = 100,
+    # id = 1:100,
+    item1 = draw_ordered(x = rnorm(n = 100, mean = 0.6, sd = 1.1), breaks = breakp, break_labels = levels),
+    item2 = draw_ordered(x = rnorm(n = 100, mean = 0.7, sd = 1), breaks = breakp, break_labels = levels),
+    item3 = draw_ordered(x = rnorm(n = 100, mean = -0.75, sd = 1.2), breaks = breakp, break_labels = levels)
+  )
 
 
-# データの概要
+# df_2021 |> count(item1)
+# df_2021 |> count(item2)
+# df_2021 |> count(item3)
+# df_2022 |> count(item1)
+# df_2022 |> count(item2)
+# df_2022 |> count(item3)
 
-## パッケージが入っていない場合にインストール
-```{r eval = FALSE}
-install.packages("skimr")
-```
+skimr::skim(df_2021)
+skimr::skim(df_2022)
 
-## 概要表示
-```{r}
-skimr::skim(df)
-```
 
-# 練習用データ作成
-## 最初の1000名からランダムにサンプリング
-```{r}
-set.seed(123) # ランダムサンプリングを再現可能にするため
 
 df_2021 <- 
-  df |> 
-  slice_head(n = 1000) |> 
-  slice_sample(n = 500)
-
-df_2021
-```
-
-```{r}
-set.seed(12345) # ランダムサンプリングを再現可能にするため
+  df_2021 |> 
+  rename("ペンギンのことが大好き" = item1,
+         "ペンギンが可愛い" = item2,
+         "ペンギンのことが苦手" = item3)
 
 df_2022 <- 
-  df |> 
-  slice_head(n = 1000) |> 
-  slice_sample(n = 500)
+  df_2022 |> 
+  rename("ペンギンのことが大好き" = item1,
+         "ペンギンが可愛い" = item2,
+         "ペンギンのことが苦手" = item3) |> 
+  slice_sample(prop = 0.8)
 
-df_2022
-```
+# 
+# 
+# glimpse(df)
+# skimr::skim(df)
 
 
-## excel出力
-
-### パッケージが入っていない場合にインストール
-```{r eval = FALSE}
-install.packages("writexl")
-```
-
-### dataフォルダを作成してexcel出力
-```{r eval=FALSE}
-dir.create("data") # フォルダ作成
 writexl::write_xlsx(df_2021, "data/df_2021.xlsx")
 writexl::write_xlsx(df_2022, "data/df_2022.xlsx")
-```
-
-
-### 作成データ消去
-```{r}
-rm(df_2021, df_2022)
 ```
 
 
@@ -114,10 +97,18 @@ rm(df_2021, df_2022)
 ## パッケージが入っていない場合にインストール
 ```{r eval = FALSE}
 install.packages("readxl")
+install.packages("skimr")
+
 ```
 
+## パッケージ読み込み
+```{r}
+library(tidyverse)
+```
 
-## 読み込み
+## データ読み込み
+
+* `パッケージ名::関数`でパッケージを読み込まず直接実行できる
 
 ```{r}
 df_2021 <- 
@@ -127,79 +118,146 @@ df_2022 <-
   readxl::read_xlsx("data/df_2022.xlsx")
 ```
 
+## データ確認
+```{r}
+df_2021
+df_2022
+```
 
-## 列の選択
+## 項目名（列名）を簡単にする
+
 ```{r}
 df_2021 <- 
   df_2021 |> 
-  select(id, A1:C5, gender, education, age)
+  rename(item1 = "ペンギンのことが大好き",
+         item2 = "ペンギンが可愛い",
+         item3 = "ペンギンのことが苦手")
+
 
 df_2021
 ```
 
-## 行の選択
-```{r}
-df_2021 <- 
-  df_2021 |> 
-  filter(age >= 20 & age < 30)
-
-df_2021
+### 【？】2022年データで同じことをやってみよう（非表示）
+```{r include=FALSE}
+df_2022 <- 
+  df_2022 |> 
+  rename(item1 = "ペンギンのことが大好き",
+         item2 = "ペンギンが可愛い",
+         item3 = "ペンギンのことが苦手")
 ```
 
-## 列名変更
 
-* 名前変える必要，本当はないですけどデモンストレーション用に
-* あえて冗長に書きます
-
+## 回答選択肢を数字にする
+### 変換が正しいか確認
 ```{r}
-df_2021 <- 
   df_2021 |> 
-  rename(設問_A1 = A1,
-         設問_A2 = A2,
-         設問_A3 = A3,
-         設問_A4 = A4,
-         設問_A5 = A5,
-         設問_C1 = C1,
-         設問_C2 = C2,
-         設問_C3 = C3,
-         設問_C4 = C4,
-         設問_C5 = C5)
-
-df_2021  
+  mutate(
+    item1_n = case_when(item1 == "全くあてはまらない"             ~ 1,
+                        item1 == "どちらかといえばあてはまらない" ~ 2,
+                        item1 == "どちらともいえない"             ~ 3,
+                        item1 == "どちらかといえばあてはまる"     ~ 4,
+                        item1 == "非常にあてはまる"               ~ 5),
+  ) |> 
+  count(item1, item1_n)
 ```
 
-## 逆転項目の作成と確認
-
-* あえて冗長に書きます
-
+### 変換
 ```{r}
 df_2021 <- 
   df_2021 |> 
-  mutate(設問_A1_r = case_when(
-                          設問_A1 == 1 ~ 6L, # Lがつくのは，整数の型という意味
-                          設問_A1 == 2 ~ 5L,
-                          設問_A1 == 3 ~ 4L,
-                          設問_A1 == 4 ~ 3L,
-                          設問_A1 == 5 ~ 2L,
-                          設問_A1 == 6 ~ 1L),
-         設問_C4_r = case_when(
-                          設問_C4 == 1 ~ 6L, 
-                          設問_C4 == 2 ~ 5L,
-                          設問_C4 == 3 ~ 4L,
-                          設問_C4 == 4 ~ 3L,
-                          設問_C4 == 5 ~ 2L,
-                          設問_C4 == 6 ~ 1L)
+  mutate(
+    item1 = case_when(item1 == "全くあてはまらない"             ~ 1,
+                      item1 == "どちらかといえばあてはまらない" ~ 2,
+                      item1 == "どちらともいえない"             ~ 3,
+                      item1 == "どちらかといえばあてはまる"     ~ 4,
+                      item1 == "非常にあてはまる"               ~ 5),
+    item2 = case_when(item2 == "全くあてはまらない"             ~ 1,
+                      item2 == "どちらかといえばあてはまらない" ~ 2,
+                      item2 == "どちらともいえない"             ~ 3,
+                      item2 == "どちらかといえばあてはまる"     ~ 4,
+                      item2 == "非常にあてはまる"               ~ 5),
+    item3 = case_when(item3 == "全くあてはまらない"             ~ 1,
+                      item3 == "どちらかといえばあてはまらない" ~ 2,
+                      item3 == "どちらともいえない"             ~ 3,
+                      item3 == "どちらかといえばあてはまる"     ~ 4,
+                      item3 == "非常にあてはまる"               ~ 5),
   )
 
+```
+
+#### 【効率化】
+```{r eval = FALSE}
+df_2021 |> 
+  mutate(across(starts_with("item"), # またはc("item1", "item2", "item3")
+                ~case_when(.x == "全くあてはまらない"             ~ 1,
+                           .x == "どちらかといえばあてはまらない" ~ 2,
+                           .x == "どちらともいえない"             ~ 3,
+                           .x == "どちらかといえばあてはまる"     ~ 4,
+                           .x == "非常にあてはまる"               ~ 5))
+         )
+
+
 
 
 ```
+
+##### 【？】2022年のデータを同じように変換してみよう（非表示）
+```{r include=FALSE}
+df_2022 <- 
+  df_2022 |> 
+  mutate(across(starts_with("item"), # またはc("item1", "item2", "item3")
+                ~case_when(.x == "全くあてはまらない"             ~ 1,
+                           .x == "どちらかといえばあてはまらない" ~ 2,
+                           .x == "どちらともいえない"             ~ 3,
+                           .x == "どちらかといえばあてはまる"     ~ 4,
+                           .x == "非常にあてはまる"               ~ 5))
+  )
+
+```
+
+
 
 ### 確認
 ```{r}
-df_2021 |> 
-  select(starts_with(c("設問_A1", "設問_C4")))
+skimr::skim(df_2021)
+skimr::skim(df_2022)
+
 ```
+
+
+
+## 項目の逆転
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  mutate(item3_r = case_when(item3 == 1 ~ 5,
+                             item3 == 2 ~ 4,
+                             item3 == 3 ~ 3,
+                             item3 == 4 ~ 2,
+                             item3 == 5 ~ 1))
+# 確認
+df_2021 |> 
+  count(item3, item3_r)
+
+```
+
+### 【？】2022年のデータを同じように変換してみよう（非表示）
+```{r include=FALSE}
+df_2022 <- 
+  df_2022 |> 
+  mutate(item3_r = case_when(item3 == 1 ~ 5,
+                             item3 == 2 ~ 4,
+                             item3 == 3 ~ 3,
+                             item3 == 4 ~ 2,
+                             item3 == 5 ~ 1))
+# 確認
+df_2022 |> 
+  count(item3, item3_r)
+```
+
+
+
+
 
 
 
@@ -207,44 +265,45 @@ df_2021 |>
 ```{r}
 df_2021 <- 
   df_2021 |> 
-  mutate(A合計 = 設問_A1_r + 設問_A2 + 設問_A3 + 設問_A4 + 設問_A5,
-         C合計 = 設問_C1 + 設問_C2 + 設問_C3 + 設問_C4_r + 設問_C5)
+  mutate(ペンギン愛得点 = item1 + item2 + item3_r)
 
 ```
+
+
 
 ### 確認
 ```{r}
 df_2021 |> 
-  select(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)
+  select(item1,  item2,  item3_r, ペンギン愛得点)
 
-3 + 3 + 4 + 3 + 4
+3 + 3 + 1
+```
+#### ヒストグラム確認
+```{r}
+ggplot(df_2021) +
+  geom_histogram(aes(ペンギン愛得点))
+
+
 ```
 
-## 2022年データ一気に
-```{r}
+#### 【？】2022年のデータを同じように変換してみよう（非表示）
+```{r include=FALSE}
 df_2022 <- 
   df_2022 |> 
-    select(id, A1:C5, gender, education, age) |> 
-    filter(age >= 20 & age < 30) |> 
-    rename_with(~str_c("設問_", .),
-                c(A1:C5)) |> 
-    mutate(across(c(設問_A1, 設問_C4),
-                  list(r = ~case_when(
-                    . == 1 ~ 6L, 
-                    . == 2 ~ 5L,
-                    . == 3 ~ 4L,
-                    . == 4 ~ 3L,
-                    . == 5 ~ 2L,
-                    . == 6 ~ 1L)
-                    )
-                  )
-           ) |> 
-    mutate(
-      A合計 = 設問_A1_r + 設問_A2 + 設問_A3 + 設問_A4 + 設問_A5,
-      C合計 = 設問_C1 + 設問_C2 + 設問_C3 + 設問_C4_r + 設問_C5
-    )
-  
+  mutate(ペンギン愛得点 = item1 + item2 + item3_r)
+
+df_2022 |> 
+  select(item1,  item2,  item3_r, ペンギン愛得点)
+
+
 ```
+
+##### 確認
+```{r}
+ggplot(df_2022) +
+  geom_histogram(aes(ペンギン愛得点))
+```
+
 
 ## データ連結
 
@@ -255,21 +314,28 @@ df_2022 <-
 ```{r}
 df_all <- 
   df_2021 |> 
-  inner_join(df_2022, by = "id")
+  inner_join(df_2022, by = "ID")
 
 df_all |> glimpse()
 ```
 
 ## rename
 
+```{r}
+  df_all |> 
+  rename(ペンギン愛得点_2021 = ペンギン愛得点.x,
+         ペンギン愛得点_2022 = ペンギン愛得点.y)
+```
 
+
+### 【効率化】
 ```{r}
 df_all <- 
   df_all |> 
-  rename_with(~str_replace(., ".x", "_2021"),
-              ends_with("x")) |>
-  rename_with(~str_replace(., ".y", "_2022"),
-              ends_with("y"))
+  rename_with(~str_replace(., ".x", "_2021"), # .xの部分を_2021に置換
+              ends_with("x")) |>              # xで終わる列を選択
+  rename_with(~str_replace(., ".y", "_2022"), # .yの部分を_2022に置換
+              ends_with("y"))                 # yで終わる列を選択
 
 df_all |> glimpse()
 ```
@@ -280,10 +346,7 @@ df_all |> glimpse()
 ```{r}
 df_long <- 
   df_all |> 
-  select(id,
-         gender_2021, education_2021, age_2021,
-         contains("合計")) |> 
-  pivot_longer(!c(id, gender_2021:age_2021),   # longにする列は!c()に指定した列以外
+    pivot_longer(!c(ID),   # longにする列は!c()に指定した列以外
                names_to = c(".value", "year"),  
                names_pattern =  "(.*)_(.*)")
   
@@ -291,4 +354,14 @@ df_long <-
 df_long
 
 ```
+
+## 箱ひげ図
+```{r}
+
+ggplot(df_long, aes(ペンギン愛得点, year)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+
 

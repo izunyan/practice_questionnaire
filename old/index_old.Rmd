@@ -1,0 +1,294 @@
+---
+title: "practice_questionnaire"
+author: ""
+date: "`r format(Sys.time(), '%Y/%m/%d')`"
+output:
+  html_document: 
+    toc: TRUE
+    toc_float: true
+    toc_depth: 4
+    number_sections: true
+    theme: readable
+    highlight: pygments
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# パッケージ読み込み
+```{r}
+library(tidyverse)
+```
+
+## パッケージが入っていない場合にインストール
+```{r eval = FALSE}
+install.packages("psychTools")
+```
+
+# サンプルデータ読み込みと先頭の表示
+
+```{r}
+df <- 
+  psychTools::bfi
+
+df |> head()
+```
+
+## 便利なtibble形式に変換しておく
+```{r}
+df <- 
+  as_tibble(df)
+```
+
+### （応用)列のインデックスをidに
+```{r}
+df <- 
+  df |> 
+  rownames_to_column(var = "id")
+```
+
+
+# データの概要
+
+## パッケージが入っていない場合にインストール
+```{r eval = FALSE}
+install.packages("skimr")
+```
+
+## 概要表示
+```{r}
+skimr::skim(df)
+```
+
+# 練習用データ作成
+## 最初の1000名からランダムにサンプリング
+```{r}
+set.seed(123) # ランダムサンプリングを再現可能にするため
+
+df_2021 <- 
+  df |> 
+  slice_head(n = 1000) |> 
+  slice_sample(n = 500)
+
+df_2021
+```
+
+```{r}
+set.seed(12345) # ランダムサンプリングを再現可能にするため
+
+df_2022 <- 
+  df |> 
+  slice_head(n = 1000) |> 
+  slice_sample(n = 500)
+
+df_2022
+```
+
+
+## excel出力
+
+### パッケージが入っていない場合にインストール
+```{r eval = FALSE}
+install.packages("writexl")
+```
+
+### dataフォルダを作成してexcel出力
+```{r eval=FALSE}
+dir.create("data") # フォルダ作成
+writexl::write_xlsx(df_2021, "data/df_2021.xlsx")
+writexl::write_xlsx(df_2022, "data/df_2022.xlsx")
+```
+
+
+### 作成データ消去
+```{r}
+rm(df_2021, df_2022)
+```
+
+
+# 練習用データの加工
+
+## パッケージが入っていない場合にインストール
+```{r eval = FALSE}
+install.packages("readxl")
+```
+
+
+## 読み込み
+
+```{r}
+df_2021 <- 
+  readxl::read_xlsx("data/df_2021.xlsx")
+
+df_2022 <- 
+  readxl::read_xlsx("data/df_2022.xlsx")
+```
+
+
+## 列の選択
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  select(id, A1:C5, gender, education, age)
+
+df_2021
+```
+
+## 行の選択
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  filter(age >= 20 & age < 30)
+
+df_2021
+```
+
+## 列名変更
+
+* 名前変える必要，本当はないですけどデモンストレーション用に
+* あえて冗長に書きます
+
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  rename(設問_A1 = A1,
+         設問_A2 = A2,
+         設問_A3 = A3,
+         設問_A4 = A4,
+         設問_A5 = A5,
+         設問_C1 = C1,
+         設問_C2 = C2,
+         設問_C3 = C3,
+         設問_C4 = C4,
+         設問_C5 = C5)
+
+df_2021  
+```
+
+## 逆転項目の作成と確認
+
+* あえて冗長に書きます
+
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  mutate(設問_A1_r = case_when(
+                          設問_A1 == 1 ~ 6L, # Lがつくのは，整数の型という意味
+                          設問_A1 == 2 ~ 5L,
+                          設問_A1 == 3 ~ 4L,
+                          設問_A1 == 4 ~ 3L,
+                          設問_A1 == 5 ~ 2L,
+                          設問_A1 == 6 ~ 1L),
+         設問_C4_r = case_when(
+                          設問_C4 == 1 ~ 6L, 
+                          設問_C4 == 2 ~ 5L,
+                          設問_C4 == 3 ~ 4L,
+                          設問_C4 == 4 ~ 3L,
+                          設問_C4 == 5 ~ 2L,
+                          設問_C4 == 6 ~ 1L)
+  )
+
+
+
+```
+
+### 確認
+```{r}
+df_2021 |> 
+  select(starts_with(c("設問_A1", "設問_C4")))
+```
+
+
+
+## 合計得点の作成
+```{r}
+df_2021 <- 
+  df_2021 |> 
+  mutate(A合計 = 設問_A1_r + 設問_A2 + 設問_A3 + 設問_A4 + 設問_A5,
+         C合計 = 設問_C1 + 設問_C2 + 設問_C3 + 設問_C4_r + 設問_C5)
+
+```
+
+### 確認
+```{r}
+df_2021 |> 
+  select(設問_A1_r, 設問_A2, 設問_A3, 設問_A4, 設問_A5, A合計)
+
+3 + 3 + 4 + 3 + 4
+```
+
+## 2022年データ一気に
+```{r}
+df_2022 <- 
+  df_2022 |> 
+    select(id, A1:C5, gender, education, age) |> 
+    filter(age >= 20 & age < 30) |> 
+    rename_with(~str_c("設問_", .),
+                c(A1:C5)) |> 
+    mutate(across(c(設問_A1, 設問_C4),
+                  list(r = ~case_when(
+                    . == 1 ~ 6L, 
+                    . == 2 ~ 5L,
+                    . == 3 ~ 4L,
+                    . == 4 ~ 3L,
+                    . == 5 ~ 2L,
+                    . == 6 ~ 1L)
+                    )
+                  )
+           ) |> 
+    mutate(
+      A合計 = 設問_A1_r + 設問_A2 + 設問_A3 + 設問_A4 + 設問_A5,
+      C合計 = 設問_C1 + 設問_C2 + 設問_C3 + 設問_C4_r + 設問_C5
+    )
+  
+```
+
+## データ連結
+
+* id列をキーに，両方で同じidを持つ行だけを連結
+* 先に来る2021年データの列には.x，後に来る2022年データの列には.yがついて識別できるように
+
+
+```{r}
+df_all <- 
+  df_2021 |> 
+  inner_join(df_2022, by = "id")
+
+df_all |> glimpse()
+```
+
+## rename
+
+
+```{r}
+df_all <- 
+  df_all |> 
+  rename_with(~str_replace(., ".x", "_2021"),
+              ends_with("x")) |>
+  rename_with(~str_replace(., ".y", "_2022"),
+              ends_with("y"))
+
+df_all |> glimpse()
+```
+
+
+## wide→long形式データに
+
+```{r}
+df_long <- 
+  df_all |> 
+  select(id,
+         gender_2021, education_2021, age_2021,
+         contains("合計")) |> 
+  pivot_longer(!c(id, gender_2021:age_2021),   # longにする列は!c()に指定した列以外
+               names_to = c(".value", "year"),  
+               names_pattern =  "(.*)_(.*)")
+  
+
+df_long
+
+```
+
